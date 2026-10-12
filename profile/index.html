@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth antialiased" data-theme="light">
+  <head>
+    <!-- =======================================================================
+         1. META & SEO OPTIMIZATION
+         ======================================================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    <meta name="description" content="Profil Akun - Verdhana Sekuritas Enterprise Platform" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <title>Profil Akun | Verdhana Sekuritas</title>
+
+    <!-- =======================================================================
+         2. EXTERNAL LIBRARIES & FONTS
+         ======================================================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- =======================================================================
+         3. TAILWIND CSS CONFIGURATION (VERDHANA IDENTITY)
+         ======================================================================= -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                red: "#D32F2F" /* Verdhana Primary Red */,
+                darkred: "#B71C1C" /* Verdhana Dark Red */,
+                silver: "#E0E0E0",
+                lightsilver: "#F8FAFC",
+                darksilver: "#94A3B8",
+              },
+              positive: "#10B981",
+              negative: "#EF4444",
+              /* Menu Icon Background Colors for Premium Look */
+              menu: {
+                orange: { bg: "#ffedd5", text: "#ea580c", darkBg: "rgba(234, 88, 12, 0.15)", darkText: "#fdba74" },
+                red: { bg: "#fee2e2", text: "#dc2626", darkBg: "rgba(220, 38, 38, 0.15)", darkText: "#fca5a5" },
+                blue: { bg: "#e0e7ff", text: "#4f46e5", darkBg: "rgba(79, 70, 229, 0.15)", darkText: "#a5b4fc" },
+                cyan: { bg: "#e0f2fe", text: "#0284c7", darkBg: "rgba(2, 132, 199, 0.15)", darkText: "#7dd3fc" },
+                purple: { bg: "#f3e8ff", text: "#9333ea", darkBg: "rgba(147, 51, 234, 0.15)", darkText: "#d8b4fe" },
+              },
+            },
+            boxShadow: {
+              "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
+              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
+            },
+            keyframes: {
+              slideUpFade: {
+                "0%": { opacity: "0", transform: "translateY(15px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              spinSlow: {
+                "0%": { transform: "rotate(0deg)" },
+                "100%": { transform: "rotate(360deg)" },
+              },
+            },
+            animation: {
+              slideUpFade: "slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              spinSlow: "spinSlow 1.5s linear infinite",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- =======================================================================
+         4. ENTERPRISE CSS ARCHITECTURE
+         ======================================================================= -->
+    <style>
+      :root {
+        --bg-outer: #f1f5f9;
+        --bg-app: #ffffff;
+        --bg-glass: rgba(255, 255, 255, 0.85);
+        --border-glass: rgba(226, 232, 240, 0.6);
+        --ease-premium: cubic-bezier(0.25, 0.1, 0.25, 1);
+        --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      html.dark {
+        --bg-outer: #020617;
+        --bg-app: #0f172a;
+        --bg-glass: rgba(15, 23, 42, 0.85);
+        --border-glass: rgba(30, 41, 59, 0.5);
+      }
+
+      body {
+        background-color: var(--bg-outer);
+        transition: background-color 0.4s var(--ease-premium);
+        overscroll-behavior-y: none;
+      }
+
+      *:focus {
+        outline: none;
+      }
+      .focus-visible-ring:focus-visible {
+        outline: 2px solid #d32f2f;
+        outline-offset: 2px;
+        border-radius: 8px;
+      }
+
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 24px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .glass-effect {
+        background-color: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-glass);
+      }
+
+      .hover-lift {
+        transition:
+          transform 0.3s var(--ease-spring),
+          box-shadow 0.3s var(--ease-premium),
+          border-color 0.3s var(--ease-premium);
+      }
+      .hover-lift:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--tw-shadow-premium-md);
+      }
+      .hover-lift:active {
+        transform: translateY(1px);
+        box-shadow: var(--tw-shadow-premium-sm);
+      }
+
+      /* Ripple Effect */
+      .ripple-surface {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+      }
+      .ripple-circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(211, 47, 47, 0.15);
+        transform: scale(0);
+        animation: ripple-anim 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        pointer-events: none;
+      }
+      @keyframes ripple-anim {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      /* Desktop Framing */
+      @media screen and (min-width: 768px) {
+        .app-container {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          height: calc(100vh - 4rem);
+          border-radius: 2.5rem;
+          overflow: hidden;
+          box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            0 0 0 10px rgba(15, 23, 42, 0.05),
+            inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+          border: 1px solid var(--border-glass);
+        }
+        .bottom-nav-glass {
+          position: absolute !important;
+          border-bottom-left-radius: 2.5rem;
+          border-bottom-right-radius: 2.5rem;
+        }
+        body {
+          overflow-y: hidden;
+        }
+        #main-viewport {
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        body {
+          background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+          background-size: 32px 32px;
+        }
+        html.dark body {
+          background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-500 ease-in-out">
+    <!-- =======================================================================
+         5. MAIN APPLICATION CONTAINER (FRAME)
+         ======================================================================= -->
+    <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-500 ease-in-out">
+      <!-- ===================================================================
+             6. HEADER (PROFIL)
+             =================================================================== -->
+      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-5 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
+        <!-- Brand Mark -->
+        <div class="flex items-baseline shrink-0">
+          <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm">V</span>
+          <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
+        </div>
+
+        <!-- Controls (Theme & Notif) -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            onclick="window.VerdhanaProfile.toggleTheme()"
+            aria-label="Ganti Tema"
+            class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            <svg id="icon-moon" class="w-[18px] h-[18px] block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="icon-sun" class="w-[18px] h-[18px] hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.32a1 1 0 011.415 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-1.32 4.22a1 1 0 010 1.415l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.415 0zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4.22-1.32a1 1 0 01-1.415 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm1.32-4.22a1 1 0 010-1.415l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.415 0zM10 6a4 4 0 100 8 4 4 0 000-8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <button
+            aria-label="Pengaturan"
+            class="relative focus-visible-ring text-gray-500 dark:text-gray-400 p-2 hover:text-brand-red dark:hover:text-brand-red transition-colors shrink-0 active:scale-90 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              ></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ===================================================================
+             7. MAIN VIEWPORT (PROFILE CONTENT)
+             =================================================================== -->
+      <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[90px] no-scrollbar">
+        <!-- --- 7.1 USER INFO IDENTIFICATION --- -->
+        <section aria-label="Informasi Pengguna" class="px-5 pt-6 pb-4 opacity-0 animate-slideUpFade" style="animation-delay: 50ms">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <!-- Avatar -->
+              <div
+                class="relative w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-brand-red to-brand-darkred flex items-center justify-center text-white text-xl font-bold shadow-premium-sm shrink-0 border-2 border-white dark:border-slate-800"
+              >
+                N
+                <!-- VIP Badge (From Reference) -->
+                <div class="absolute -top-1 -right-2 w-6 h-6 bg-[#E0E7FF] dark:bg-slate-700 rounded-full flex items-center justify-center shadow-sm border border-white dark:border-slate-800">
+                  <svg class="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#A5B4FC]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.1L12 16.4l-6.3 4.7 2.3-7.1-6-4.6h7.6z" /></svg>
+                </div>
+              </div>
+
+              <!-- Account Details -->
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2 mb-1">
+                  <h2 class="text-base font-black text-gray-800 dark:text-white tracking-tight">niaramdhan****7@gmail.com</h2>
+                  <!-- Hide/Show Icon -->
+                  <button aria-label="Sembunyikan email" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <!-- KYC Verified Badge -->
+                <div class="inline-flex items-center gap-1.5 bg-green-50 dark:bg-emerald-900/30 border border-green-200 dark:border-emerald-800/50 rounded-full px-2.5 py-1 w-max">
+                  <svg class="w-3 h-3 text-positive" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-[10px] font-bold text-positive tracking-wide">Sudah terdaftar dengan nama asli</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- --- 7.2 ACTION BUTTONS (Deposit, Withdraw, Details) --- -->
+        <section aria-label="Aksi Keuangan" class="px-5 mb-6 opacity-0 animate-slideUpFade" style="animation-delay: 150ms">
+          <div class="flex justify-between items-start gap-3 bg-brand-lightsilver dark:bg-slate-800/50 p-4 rounded-2xl border border-brand-silver/50 dark:border-slate-700/50">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
+              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
+                <!-- Download/Deposit Icon -->
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </div>
+              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Pengisian<br />saldo</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
+              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
+                <!-- Upload/Withdraw Icon -->
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                </svg>
+              </div>
+              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Penarikan<br />&nbsp;</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
+              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
+                <!-- Details/List Icon -->
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                </svg>
+              </div>
+              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Rincian<br />&nbsp;</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- --- 7.3 MAIN ASSETS CARD (PREMIUM DESIGN) --- -->
+        <section aria-label="Ringkasan Aset" class="px-5 mb-8 opacity-0 animate-slideUpFade" style="animation-delay: 250ms">
+          <div class="relative bg-white dark:bg-slate-800 rounded-3xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-md overflow-hidden">
+            <!-- Decorative Gradient Background (Subtle) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-red/5 to-transparent pointer-events-none"></div>
+
+            <div class="relative z-10 p-5">
+              <!-- Card Header -->
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="text-sm font-black text-gray-800 dark:text-white tracking-tight">Aset Saya</h3>
+                <button id="btn-refresh-assets" aria-label="Perbarui data" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded-full p-1 active:scale-90">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Main Balance -->
+              <div class="mb-6">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Dana yang tersedia (Rp)</span>
+                  <button id="btn-toggle-balance" aria-label="Tampilkan saldo" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded px-1">
+                    <svg class="w-3.5 h-3.5" id="icon-eye-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      ></path>
+                    </svg>
+                    <svg class="w-3.5 h-3.5 hidden" id="icon-eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none mb-2 data-balance" data-value="125000000">***</div>
+                <div class="text-[11px] font-semibold text-gray-500 dark:text-gray-400">Dana yang dibekukan: <span class="text-gray-700 dark:text-gray-300 font-bold data-balance" data-value="500000">***</span></div>
+              </div>
+
+              <!-- Statistics Grid (2 Columns) -->
+              <div class="grid grid-cols-2 gap-y-5 gap-x-4 pt-5 border-t border-brand-silver/60 dark:border-slate-700/80">
+                <!-- Stat 1 -->
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Total aset</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="125500000">***</span>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Dana yang digunakan</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="45000000">***</span>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">P&L</span>
+                  <span class="text-sm font-black text-positive data-balance" data-value="2450000" data-sign="+">***</span>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Equity</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="127950000">***</span>
+                </div>
+
+                <!-- Stat 5 -->
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Tunggakan</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="0">***</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- --- 7.4 NAVIGATION MENU LIST (KYC, Bank, Password, Company, Lang, Logout) --- -->
+        <section aria-label="Menu Akun" class="px-5 mb-8 opacity-0 animate-slideUpFade" style="animation-delay: 350ms">
+          <div class="bg-white dark:bg-slate-800 rounded-3xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm overflow-hidden flex flex-col divide-y divide-brand-silver/40 dark:divide-slate-700/60">
+            <!-- Item 1: Verifikasi KYC -->
+            <a href="#kyc" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-orange-bg,theme('colors.menu.orange.bg'))] dark:bg-[color:var(--color-menu-orange-darkBg,theme('colors.menu.orange.darkBg'))] text-[color:var(--color-menu-orange-text,theme('colors.menu.orange.text'))] dark:text-[color:var(--color-menu-orange-darkText,theme('colors.menu.orange.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Verifikasi KYC</span>
+              </div>
+              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
+
+            <!-- Item 2: Akun Bank -->
+            <a href="#bank" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-red-bg,theme('colors.menu.red.bg'))] dark:bg-[color:var(--color-menu-red-darkBg,theme('colors.menu.red.darkBg'))] text-[color:var(--color-menu-red-text,theme('colors.menu.red.text'))] dark:text-[color:var(--color-menu-red-darkText,theme('colors.menu.red.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Akun bank</span>
+              </div>
+              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
+
+            <!-- Item 3: Kata Sandi Penarikan -->
+            <a href="#withdraw-password" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-blue-bg,theme('colors.menu.blue.bg'))] dark:bg-[color:var(--color-menu-blue-darkBg,theme('colors.menu.blue.darkBg'))] text-[color:var(--color-menu-blue-text,theme('colors.menu.blue.text'))] dark:text-[color:var(--color-menu-blue-darkText,theme('colors.menu.blue.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Kata sandi penarikan</span>
+              </div>
+              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
+
+            <!-- Item 4: Ubah Kata Sandi Masuk -->
+            <a href="#login-password" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-cyan-bg,theme('colors.menu.cyan.bg'))] dark:bg-[color:var(--color-menu-cyan-darkBg,theme('colors.menu.cyan.darkBg'))] text-[color:var(--color-menu-cyan-text,theme('colors.menu.cyan.text'))] dark:text-[color:var(--color-menu-cyan-darkText,theme('colors.menu.cyan.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Ubah kata sandi masuk</span>
+              </div>
+              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
+
+            <!-- Item 5: Pengenalan Perusahaan -->
+            <a href="#company" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-purple-bg,theme('colors.menu.purple.bg'))] dark:bg-[color:var(--color-menu-purple-darkBg,theme('colors.menu.purple.darkBg'))] text-[color:var(--color-menu-purple-text,theme('colors.menu.purple.text'))] dark:text-[color:var(--color-menu-purple-darkText,theme('colors.menu.purple.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Pengenalan Perusahaan</span>
+              </div>
+              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </a>
+
+            <!-- Item 6: Bahasa -->
+            <a href="#language" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-brand-lightsilver dark:bg-slate-700 text-gray-600 dark:text-gray-300 flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Bahasa</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-400">
+                <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Bahasa Indonesia</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </a>
+
+            <!-- Item 7: Keluar -->
+            <button onclick="alert('Keluar akun berhasil!')" class="ripple-surface focus-visible-ring w-full group flex items-center justify-between p-4 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors text-left">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-red-100 dark:bg-red-900/30 text-brand-red flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-bold text-brand-red tracking-tight">Keluar</span>
+              </div>
+              <div class="flex items-center text-brand-red group-hover:translate-x-1 transition-transform">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              </div>
+            </button>
+          </div>
+        </section>
+      </div>
+      <!-- END MAIN VIEWPORT -->
+
+      <!-- ===================================================================
+             8. BOTTOM NAVIGATION BAR (PROFILE ACTIVE)
+             =================================================================== -->
+      <nav
+        aria-label="Navigasi Utama"
+        class="glass-effect bottom-nav-glass pb-safe absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.03)] transition-colors duration-500"
+      >
+        <!-- Beranda -->
+        <a
+          href="Verdhana_Sek V.2_2.html"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <i class="fa-solid fa-house"></i>
+          </div>
+          <span class="text-[10px] font-medium group-hover:font-semibold">Beranda</span>
+        </a>
+
+        <!-- Pasar -->
+        <a
+          href="#market"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <span class="text-[10px] font-medium group-hover:font-semibold">Pasar</span>
+        </a>
+
+        <!-- Berdagang -->
+        <a
+          href="#trade"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+          </div>
+          <span class="text-[10px] font-medium group-hover:font-semibold">Berdagang</span>
+        </a>
+
+        <!-- Favorit -->
+        <a
+          href="#favorites"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <span class="text-[10px] font-medium group-hover:font-semibold">Favorit</span>
+        </a>
+
+        <!-- Profil (Active) -->
+        <a href="#profile" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <i class="fa-solid fa-user drop-shadow-sm"></i>
+          </div>
+          <span class="text-[10px] font-bold">Profil</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- ===================================================================
+         9. PROFILE JAVASCRIPT LOGIC (SENSITIVE DATA MASKING & STATE)
+         =================================================================== -->
+    <script>
+      "use strict";
+
+      class VerdhanaProfileApp {
+        constructor() {
+          this.isBalanceVisible = false;
+          this.init();
+        }
+
+        init() {
+          this.setupToggleBalance();
+          this.setupRippleEffect();
+        }
+
+        toggleTheme() {
+          const html = document.documentElement;
+          const iconMoon = document.getElementById("icon-moon");
+          const iconSun = document.getElementById("icon-sun");
+
+          if (html.classList.contains("dark")) {
+            html.classList.remove("dark");
+            html.setAttribute("data-theme", "light");
+            iconMoon.classList.remove("hidden");
+            iconSun.classList.add("hidden");
+          } else {
+            html.classList.add("dark");
+            html.setAttribute("data-theme", "dark");
+            iconMoon.classList.add("hidden");
+            iconSun.classList.remove("hidden");
+          }
+        }
+
+        setupToggleBalance() {
+          const btnToggle = document.getElementById("btn-toggle-balance");
+          const iconClosed = document.getElementById("icon-eye-closed");
+          const iconOpen = document.getElementById("icon-eye-open");
+          const balanceElements = document.querySelectorAll(".data-balance");
+
+          if (!btnToggle) return;
+
+          btnToggle.addEventListener("click", () => {
+            this.isBalanceVisible = !this.isBalanceVisible;
+
+            if (this.isBalanceVisible) {
+              iconClosed.classList.add("hidden");
+              iconOpen.classList.remove("hidden");
+
+              balanceElements.forEach((el) => {
+                const rawVal = parseFloat(el.getAttribute("data-value")) || 0;
+                const sign = el.getAttribute("data-sign") || "";
+                el.textContent = sign + new Intl.NumberFormat("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(rawVal);
+              });
+            } else {
+              iconOpen.classList.add("hidden");
+              iconClosed.classList.remove("hidden");
+
+              balanceElements.forEach((el) => {
+                el.textContent = "***";
+              });
+            }
+          });
+        }
+
+        setupRippleEffect() {
+          document.addEventListener("click", (e) => {
+            const target = e.target.closest(".ripple-surface");
+            if (!target) return;
+
+            const rect = target.getBoundingClientRect();
+            const diameter = Math.max(target.clientWidth, target.clientHeight);
+            const radius = diameter / 2;
+
+            const ripple = document.createElement("span");
+            ripple.className = "ripple-circle";
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${e.clientX - rect.left - radius}px`;
+            ripple.style.top = `${e.clientY - rect.top - radius}px`;
+
+            const existing = target.querySelector(".ripple-circle");
+            if (existing) existing.remove();
+
+            target.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+          });
+        }
+      }
+
+      // Bootstrap Profile App
+      document.addEventListener("DOMContentLoaded", () => {
+        window.VerdhanaProfile = new VerdhanaProfileApp();
+      });
+    </script>
+  </body>
+</html>
