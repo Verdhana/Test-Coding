@@ -12,10 +12,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-    <title>Verdhana Sekuritas</title>
+    <title>Verdhana Sekuritas | Premium Trading Platform</title>
 
     <!-- =======================================================================
-         2. EXTERNAL LIBRARIES & FONTS (AS REQUESTED: RETAINING FONTAWESOME)
+         2. EXTERNAL LIBRARIES & FONTS
          ======================================================================= -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- =======================================================================
-         3. TAILWIND CSS CONFIGURATION (EXACT MATCH VERDHANA COLORS)
+         3. TAILWIND CSS CONFIGURATION (PRODUCTION READY)
          ======================================================================= -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,20 +37,20 @@
             },
             colors: {
               brand: {
-                red: "#D32F2F" /* EXACT CLIENT RED */,
-                darkred: "#B71C1C" /* EXACT CLIENT DARK RED */,
-                silver: "#E0E0E0" /* EXACT CLIENT SILVER */,
-                lightsilver: "#F8FAFC" /* EXACT CLIENT LIGHT SILVER */,
-                darksilver: "#94A3B8" /* EXACT CLIENT DARK SILVER */,
+                red: "#D32F2F" /* Client Exact Red */,
+                darkred: "#B71C1C" /* Client Exact Dark Red */,
+                silver: "#E0E0E0" /* Client Exact Silver */,
+                lightsilver: "#F8FAFC",
+                darksilver: "#94A3B8",
               },
               positive: "#10B981",
               negative: "#EF4444",
             },
             boxShadow: {
-              /* Premium Multi-layered Shadows */
-              "premium-sm": "0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(0, 0, 0, 0.03)",
-              "premium-md": "0 12px 32px -4px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
-              "premium-glass": "0 8px 32px 0 rgba(31, 38, 135, 0.05)",
+              /* Premium Multi-layered Soft Shadows */
+              "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
+              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
               "premium-inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
             },
             keyframes: {
@@ -64,13 +64,13 @@
               },
               pulseSubtle: {
                 "0%, 100%": { opacity: "1", transform: "scale(1)" },
-                "50%": { opacity: "0.8", transform: "scale(1.05)" },
+                "50%": { opacity: "0.85", transform: "scale(1.05)" },
               },
             },
             animation: {
-              marquee: "marquee 15s linear infinite",
+              marquee: "marquee 18s linear infinite",
               slideUpFade: "slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-              pulseSubtle: "pulseSubtle 2s ease-in-out infinite",
+              pulseSubtle: "pulseSubtle 2.5s ease-in-out infinite",
             },
           },
         },
@@ -78,7 +78,7 @@
     </script>
 
     <!-- =======================================================================
-         4. ENTERPRISE CSS ARCHITECTURE (POLISHING & RESPONSIVENESS)
+         4. ENTERPRISE CSS ARCHITECTURE (POLISHED & RESPONSIVE)
          ======================================================================= -->
     <style>
       /* --- 4.1 CSS VARIABLES & THEME TOKENS --- */
@@ -91,8 +91,7 @@
         --text-main: #1f2937;
         --text-muted: #64748b;
 
-        /* Custom easing for ultra-smooth transitions */
-        --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+        --ease-premium: cubic-bezier(0.25, 0.1, 0.25, 1);
         --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
 
@@ -100,7 +99,7 @@
         --bg-outer: #020617;
         --bg-app: #0f172a;
         --bg-glass: rgba(15, 23, 42, 0.85);
-        --border-glass: rgba(30, 41, 59, 0.6);
+        --border-glass: rgba(30, 41, 59, 0.5);
 
         --text-main: #f8fafc;
         --text-muted: #94a3b8;
@@ -109,21 +108,21 @@
       /* --- 4.2 BASE RESETS --- */
       body {
         background-color: var(--bg-outer);
-        transition: background-color 0.4s var(--ease-apple);
-        overscroll-behavior-y: none; /* Mencegah bounce effect di iOS */
+        transition: background-color 0.4s var(--ease-premium);
+        overscroll-behavior-y: none; /* Cegah bounce effect iOS */
       }
 
-      /* Accessbility Focus Ring */
+      /* Aksesibilitas (A11y) Premium Focus Ring */
       *:focus {
         outline: none;
       }
       .focus-visible-ring:focus-visible {
         outline: 2px solid #d32f2f;
         outline-offset: 2px;
-        border-radius: 6px;
+        border-radius: 8px;
       }
 
-      /* Safe area insets untuk iPhone Notch / Home Bar */
+      /* Area Aman Layar HP (Notch & Home Bar) */
       .pb-safe {
         padding-bottom: env(safe-area-inset-bottom, 24px);
       }
@@ -151,28 +150,30 @@
       .hover-lift {
         transition:
           transform 0.3s var(--ease-spring),
-          box-shadow 0.3s var(--ease-apple);
+          box-shadow 0.3s var(--ease-premium),
+          border-color 0.3s var(--ease-premium);
       }
       .hover-lift:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        transform: translateY(-3px);
+        box-shadow: var(--tw-shadow-premium-md);
       }
       .hover-lift:active {
         transform: translateY(1px);
+        box-shadow: var(--tw-shadow-premium-sm);
       }
 
-      /* Ripple Effect Base */
+      /* Premium Ripple Effect */
       .ripple-surface {
         position: relative;
         overflow: hidden;
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0); /* Hardware Acceleration */
       }
       .ripple-circle {
         position: absolute;
         border-radius: 50%;
-        background-color: rgba(211, 47, 47, 0.15); /* Verdhana Red */
+        background-color: rgba(211, 47, 47, 0.12); /* Verdhana Red */
         transform: scale(0);
-        animation: ripple-anim 0.6s linear forwards;
+        animation: ripple-anim 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
         pointer-events: none;
       }
       @keyframes ripple-anim {
@@ -182,12 +183,14 @@
         }
       }
 
-      /* ApexCharts Custom Tooltip Override */
+      /* --- 4.4 APEXCHARTS OVERRIDES (TOOLTIP FIX & A11Y) --- */
+      /* Memastikan tooltip tidak terpotong dengan merendernya di luar container absolute */
       .apexcharts-tooltip {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
         overflow: visible !important;
+        z-index: 9999 !important;
       }
       .apexcharts-xcrosshairs,
       .apexcharts-ycrosshairs {
@@ -196,30 +199,28 @@
         stroke-width: 1px !important;
       }
 
-      /* --- 4.4 RESPONSIVE FRAMING (DESKTOP MODE) --- */
-      /* Layar HP standar (hingga 480px) menggunakan 100% width, mx-auto dari Tailwind */
-
-      /* Tablet & Desktop: Mensimulasikan bezel HP */
+      /* --- 4.5 RESPONSIVE FRAMING (DESKTOP BEZEL SIMULATION) --- */
       @media screen and (min-width: 768px) {
         .app-container {
           margin-top: 2rem;
           margin-bottom: 2rem;
           height: calc(100vh - 4rem);
-          border-radius: 2rem;
+          border-radius: 2.5rem; /* Sudut melengkung layaknya HP premium */
           overflow: hidden;
           box-shadow:
             0 25px 50px -12px rgba(0, 0, 0, 0.25),
-            0 0 0 12px rgba(0, 0, 0, 0.03);
+            0 0 0 10px rgba(15, 23, 42, 0.05),
+            /* Outer Bezel Tipis */ inset 0 0 0 2px rgba(255, 255, 255, 0.5); /* Inner Glass reflection */
           border: 1px solid var(--border-glass);
         }
         .bottom-nav-glass {
           position: absolute !important;
-          border-bottom-left-radius: 2rem;
-          border-bottom-right-radius: 2rem;
+          border-bottom-left-radius: 2.5rem;
+          border-bottom-right-radius: 2.5rem;
         }
         body {
           overflow-y: hidden;
-        } /* Cegah scroll ganda di desktop */
+        } /* Lock outer body scroll */
         #main-viewport {
           height: 100%;
           overflow-y: auto;
@@ -228,36 +229,36 @@
 
       @media screen and (min-width: 1024px) {
         body {
-          background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
           background-size: 32px 32px;
         }
         html.dark body {
-          background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
         }
       }
     </style>
   </head>
 
-  <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-300">
+  <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-500 ease-in-out">
     <!-- =======================================================================
          5. MAIN APPLICATION CONTAINER (FRAME)
          ======================================================================= -->
-    <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-300">
+    <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-500 ease-in-out">
       <!-- ===================================================================
-             6. HEADER (UPGRADED: GLASSMORPHISM & PRECISE ALIGNMENT)
-             =================================================================== -->
-      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-4 pt-4 pb-3 flex items-center justify-between transition-colors duration-300">
+           6. HEADER (GLASSMORPHISM & ALIGNMENT)
+           =================================================================== -->
+      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-4 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
         <!-- Logo Asli Verdhana -->
         <a href="#home" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 cursor-pointer focus-visible-ring p-1 -ml-1 group">
           <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm group-hover:scale-105 transition-transform duration-300">V</span>
           <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
         </a>
 
-        <!-- Search Bar Polished -->
+        <!-- Search Bar -->
         <div class="flex-1 mx-3" role="search">
           <label for="global-search" class="sr-only">Cari saham</label>
           <div
-            class="bg-brand-lightsilver dark:bg-slate-800 rounded-full flex items-center px-3.5 py-2 border border-transparent focus-within:border-brand-red/30 focus-within:ring-2 focus-within:ring-brand-red/10 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all duration-300 shadow-[var(--shadow-inner)]"
+            class="bg-brand-lightsilver dark:bg-slate-800 rounded-full flex items-center px-3.5 py-2 border border-transparent focus-within:border-brand-red/30 focus-within:ring-2 focus-within:ring-brand-red/10 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all duration-300 shadow-premium-inner"
           >
             <i class="fa-solid fa-search text-brand-darksilver text-xs" aria-hidden="true"></i>
             <input
@@ -272,7 +273,7 @@
         </div>
 
         <!-- Controls: Lang, Theme, Bell -->
-        <div class="flex items-center gap-3 shrink-0">
+        <div class="flex items-center gap-2.5 shrink-0">
           <!-- Select Lang -->
           <div class="relative group">
             <label for="lang-switcher" class="sr-only">Pilih Bahasa</label>
@@ -288,39 +289,47 @@
           </div>
 
           <!-- Theme Toggle -->
-          <button onclick="window.VerdhanaApp.theme.toggle()" aria-label="Ganti Tema" class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-1">
+          <button
+            onclick="window.VerdhanaApp.theme.toggle()"
+            aria-label="Ganti Tema"
+            class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
             <i id="theme-icon" class="fa-solid fa-moon text-sm" aria-hidden="true"></i>
           </button>
 
           <!-- Notification -->
-          <button aria-label="Notifikasi" class="relative focus-visible-ring text-gray-500 dark:text-gray-400 p-1 hover:text-brand-red dark:hover:text-brand-red transition-colors shrink-0 active:scale-90">
+          <button
+            aria-label="Notifikasi"
+            class="relative focus-visible-ring text-gray-500 dark:text-gray-400 p-1.5 hover:text-brand-red dark:hover:text-brand-red transition-colors shrink-0 active:scale-90 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
             <i class="fa-solid fa-bell text-lg" aria-hidden="true"></i>
-            <span class="absolute top-[2px] right-[2px] w-2.5 h-2.5 bg-brand-red rounded-full border-2 border-white dark:border-slate-900 animate-pulseSubtle"></span>
+            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-red rounded-full border-2 border-white dark:border-slate-900 animate-pulseSubtle"></span>
           </button>
         </div>
       </header>
 
       <!-- ===================================================================
-             7. MAIN VIEWPORT (Scrollable Content)
-             =================================================================== -->
+           7. MAIN VIEWPORT (Scrollable Content)
+           =================================================================== -->
       <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[90px] no-scrollbar">
         <!-- --- 7.1 BANNERS & MARQUEE --- -->
-        <section aria-label="Banner Promosi" class="p-4 opacity-0 animate-slideUpFade" style="animation-delay: 100ms">
-          <!-- Exact Snapshot Snap Carousel from Source, heavily polished -->
+        <section aria-label="Banner Promosi" class="p-4 opacity-0 animate-slideUpFade" style="animation-delay: 50ms">
+          <!-- Scroll Snap Carousel Premium -->
           <div class="relative w-full rounded-2xl overflow-hidden shadow-premium-md hover-lift group" role="region" aria-roledescription="carousel">
             <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar w-full h-full cursor-grab active:cursor-grabbing">
               <div class="snap-center shrink-0 w-full relative ripple-surface">
-                <!-- Overlay tipis agar indikator terlihat jelas -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none"></div>
-                <img src="https://i.ibb.co/MDC2LRnW/image.png?2.0.1788839085359" alt="Banner 1" class="w-full aspect-[21/9] object-cover transition-transform duration-[4000ms] group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
+                <img src="https://i.ibb.co/MDC2LRnW/image.png?2.0.1788839085359" alt="Banner 1" class="w-full aspect-[21/9] object-cover transition-transform duration-[5000ms] group-hover:scale-105" />
               </div>
+
               <div class="snap-center shrink-0 w-full relative ripple-surface">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none"></div>
-                <img src="https://i.ibb.co/kgRzp7Wd/image.png?2.0.1788839085359" alt="Banner 2" class="w-full aspect-[21/9] object-cover transition-transform duration-[4000ms] group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
+                <img src="https://i.ibb.co/kgRzp7Wd/image.png?2.0.1788839085359" alt="Banner 2" class="w-full aspect-[21/9] object-cover transition-transform duration-[5000ms] group-hover:scale-105" />
               </div>
             </div>
-            <!-- Indicator exact logic from source -->
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20" aria-hidden="true">
+
+            <!-- Indicators -->
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20" aria-hidden="true">
               <div class="w-5 h-1.5 bg-brand-red rounded-full shadow-sm transition-all duration-300"></div>
               <div class="w-1.5 h-1.5 bg-white/70 rounded-full transition-all duration-300"></div>
             </div>
@@ -329,7 +338,7 @@
           <!-- Marquee Polished -->
           <button
             aria-label="Pengumuman"
-            class="ripple-surface focus-visible-ring w-full flex items-center gap-3 mt-4 bg-brand-lightsilver dark:bg-slate-800 rounded-xl px-4 py-3.5 border border-brand-silver/50 dark:border-slate-700 hover:border-brand-red/30 transition-all duration-300 shadow-premium-sm group cursor-pointer"
+            class="ripple-surface focus-visible-ring w-full flex items-center gap-3 mt-4 bg-brand-lightsilver dark:bg-slate-800 rounded-xl px-4 py-3.5 border border-brand-silver/50 dark:border-slate-700/80 hover:border-brand-red/30 transition-all duration-300 shadow-premium-sm group cursor-pointer"
           >
             <i class="fa-solid fa-bullhorn text-brand-red text-sm shrink-0 drop-shadow-sm group-hover:-rotate-12 transition-transform duration-300" aria-hidden="true"></i>
             <div class="w-full overflow-hidden relative flex items-center h-4">
@@ -340,38 +349,38 @@
           </button>
         </section>
 
-        <!-- --- 7.2 QUICK MENUS (EXACT ICONS, POLISHED ALIGNMENT) --- -->
-        <section aria-label="Menu Cepat" class="px-4 mb-5 opacity-0 animate-slideUpFade" style="animation-delay: 200ms">
-          <div class="flex justify-between items-start gap-1">
-            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+        <!-- --- 7.2 QUICK MENUS (POLISHED PADDING & TRANSITIONS) --- -->
+        <section aria-label="Menu Cepat" class="px-4 mb-5 opacity-0 animate-slideUpFade" style="animation-delay: 150ms">
+          <div class="flex justify-between items-start gap-1.5">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1.5 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors duration-300">
               <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
                 <i class="fa-solid fa-file-contract"></i>
               </div>
               <span data-i18n="menu_opsi" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Kontrak<br />Opsi</span>
             </button>
 
-            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1.5 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors duration-300">
               <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
                 <i class="fa-solid fa-chart-line"></i>
               </div>
               <span data-i18n="menu_nego" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Pasar<br />Nego</span>
             </button>
 
-            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1.5 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors duration-300">
               <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
                 <i class="fa-solid fa-building-columns"></i>
               </div>
               <span data-i18n="menu_ipo" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Beli<br />IPO</span>
             </button>
 
-            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1.5 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors duration-300">
               <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
                 <i class="fa-solid fa-handshake"></i>
               </div>
               <span data-i18n="menu_otc" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">OTC<br />&nbsp;</span>
             </button>
 
-            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1.5 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors duration-300">
               <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
                 <i class="fa-solid fa-headset"></i>
               </div>
@@ -379,12 +388,12 @@
             </button>
           </div>
         </section>
-
         <hr class="border-brand-silver/40 dark:border-slate-800 mx-4 transition-colors" aria-hidden="true" />
+
         <!-- ===================================================================
-                 7.3 INDEKS GLOBAL & LOKAL (SQUARISH CARDS & HORIZONTAL SWIPE)
-                 =================================================================== -->
-        <section aria-labelledby="heading-indices" class="mt-6 opacity-0 animate-slideUpFade" style="animation-delay: 300ms">
+             7.3 INDEKS GLOBAL & LOKAL (SQUARISH CARDS & BUG-FIX OVERFLOW)
+             =================================================================== -->
+        <section aria-labelledby="heading-indices" class="mt-6 opacity-0 animate-slideUpFade" style="animation-delay: 250ms">
           <div class="px-4 flex items-center justify-between mb-3">
             <div>
               <h3 id="heading-indices" data-i18n="idx_title" class="text-sm font-bold text-gray-800 dark:text-white transition-colors tracking-tight">Indeks Global & Lokal</h3>
@@ -395,20 +404,22 @@
               <i class="fa-solid fa-chevron-right text-[8px] ml-1 group-hover:translate-x-0.5 transition-transform duration-300"></i>
             </button>
           </div>
+
           <!-- STATE MANAGEMENT: Horizontal Scroll Container -->
           <div class="relative w-full">
             <div id="real-data-grid" class="flex gap-3 overflow-x-auto snap-x px-4 pb-6 pt-1 no-scrollbar" role="region" aria-label="Grafik Indeks Interaktif">
               <!-- INDEX CARD 1: ABX -->
+              <!-- KOREKSI: overflow-hidden ditambahkan agar grafik melengkung rapi di sudut -->
               <button
                 aria-label="Indeks Acceleration Board, Nilai 3186 koma 86, Naik 3 koma 06 persen"
                 class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative overflow-hidden"
               >
-                <!-- Bagian Atas: Header & Data Harga (Z-Index 10 agar di atas grafik) -->
+                <!-- Bagian Atas: Header & Data Harga (Z-Index 10 agar selalu di atas grafik) -->
                 <div class="relative z-10 w-full p-3.5 pb-0">
                   <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">Acceleration</h4>
                   <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">ABX</div>
 
-                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
+                  <!-- Nominal Harga & Persentase (Sejajar horizontal, terpisah dari grafik) -->
                   <div class="flex items-center gap-2 mt-2 mb-2">
                     <span class="text-[13px] font-bold text-positive tracking-tight" id="val-abx">3.186,86</span>
                     <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+3,06%</span>
@@ -417,7 +428,7 @@
 
                 <!-- Bagian Bawah: Chart Wrapper (Absolute Bottom, Z-Index 0) -->
                 <div class="absolute bottom-0 left-0 w-full h-[65px] z-0 pointer-events-none">
-                  <!-- Melebarkan sedikit margin grafik agar stroke tidak terpotong di tepi kiri/kanan -->
+                  <!-- Margin negatif kecil agar stroke tidak terpotong garis pinggir -->
                   <div id="chart-abx" class="w-[102%] h-full relative -left-[1%]" aria-hidden="true"></div>
                 </div>
               </button>
@@ -486,10 +497,10 @@
         </section>
 
         <!-- ===================================================================
-                 7.4 SAHAM POPULER (LIST ROW DESIGN DENGAN WARNA ASLI KLIEN)
-                 =================================================================== -->
-        <section aria-labelledby="heading-stocks" class="mt-4 px-4 opacity-0 animate-slideUpFade" style="animation-delay: 400ms">
-          <div class="flex items-center justify-between mb-3">
+             7.4 SAHAM POPULER (LIST ROW DESIGN - PREMIUM HOVER EFFECTS)
+             =================================================================== -->
+        <section aria-labelledby="heading-stocks" class="mt-4 px-4 opacity-0 animate-slideUpFade" style="animation-delay: 350ms">
+          <div class="flex items-center justify-between mb-3 border-b border-brand-silver/40 dark:border-slate-800 pb-2">
             <div>
               <h3 id="heading-stocks" data-i18n="pop_title" class="text-sm font-bold text-gray-800 dark:text-white transition-colors tracking-tight">Saham Populer</h3>
             </div>
@@ -499,14 +510,14 @@
           </div>
 
           <!-- Container Data -->
-          <div id="stocks-list-container" class="flex flex-col border-t border-brand-silver/40 dark:border-slate-800 transition-colors" role="list">
+          <div id="stocks-list-container" class="flex flex-col transition-colors" role="list">
             <!-- BBCA -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
-                <!-- Logo Placeholder dengan warna biru BCA -->
                 <div
                   class="w-10 h-10 rounded-full bg-[#005E9D]/10 text-[#005E9D] dark:bg-[#005E9D]/20 dark:text-[#38bdf8] font-bold flex items-center justify-center shrink-0 border border-[#005E9D]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
                 >
@@ -524,17 +535,17 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">6.050,00</div>
-                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+0,83%</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-positive/10 px-1.5 py-0.5 rounded shadow-sm">+0,83%</div>
               </div>
             </div>
 
             <!-- TLKM -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
-                <!-- Logo Placeholder dengan warna merah Telkom -->
                 <div
                   class="w-10 h-10 rounded-full bg-[#D32F2F]/10 text-[#D32F2F] dark:bg-[#D32F2F]/20 dark:text-[#fca5a5] font-bold flex items-center justify-center shrink-0 border border-[#D32F2F]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
                 >
@@ -552,17 +563,17 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">2.320,00</div>
-                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+2,65%</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-positive/10 px-1.5 py-0.5 rounded shadow-sm">+2,65%</div>
               </div>
             </div>
 
             <!-- BBRI -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
-                <!-- Logo Placeholder dengan warna biru BRI -->
                 <div
                   class="w-10 h-10 rounded-full bg-[#0B5C9F]/10 text-[#0B5C9F] dark:bg-[#0B5C9F]/20 dark:text-[#7dd3fc] font-bold flex items-center justify-center shrink-0 border border-[#0B5C9F]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
                 >
@@ -580,14 +591,15 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">3.100,00</div>
-                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+2,31%</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-positive/10 px-1.5 py-0.5 rounded shadow-sm">+2,31%</div>
               </div>
             </div>
 
             <!-- ASII -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
                 <div
@@ -607,14 +619,15 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">4.820,00</div>
-                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+0,42%</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-positive/10 px-1.5 py-0.5 rounded shadow-sm">+0,42%</div>
               </div>
             </div>
 
             <!-- PGAS (Negative Trend Example) -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
                 <div
@@ -634,14 +647,15 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">1.420,00</div>
-                <div class="text-[10px] font-bold text-negative mt-0.5 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded shadow-sm">-1,39%</div>
+                <div class="text-[10px] font-bold text-negative mt-0.5 bg-negative/10 px-1.5 py-0.5 rounded shadow-sm">-1,39%</div>
               </div>
             </div>
 
             <!-- BUMI -->
             <div
               role="listitem"
-              class="group flex items-center justify-between py-3.5 border-b border-transparent cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+              class="group flex items-center justify-between py-3 border-b border-transparent cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2 focus-visible-ring"
+              tabindex="0"
             >
               <div class="flex items-center gap-3 w-[45%]">
                 <div
@@ -661,7 +675,7 @@
               </div>
               <div class="w-[35%] text-right flex flex-col items-end">
                 <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">180,00</div>
-                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+3,45%</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-positive/10 px-1.5 py-0.5 rounded shadow-sm">+3,45%</div>
               </div>
             </div>
           </div>
@@ -670,15 +684,15 @@
       <!-- END SCROLL VIEW -->
 
       <!-- =======================================================================
-             8. BOTTOM NAVIGATION BAR (GLASSMORPHISM, FIXED)
-             ======================================================================= -->
+           8. BOTTOM NAVIGATION BAR (GLASSMORPHISM, FIXED)
+           ======================================================================= -->
       <nav
         aria-label="Navigasi Utama"
-        class="glass-effect bottom-nav-glass pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2 z-[9999] shadow-[0_-4px_15px_rgba(0,0,0,0.04)] transition-colors duration-500"
+        class="glass-effect bottom-nav-glass pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.03)] transition-colors duration-500"
       >
         <!-- Beranda (Active) -->
         <a href="#home" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <i class="fa-solid fa-house drop-shadow-sm"></i>
           </div>
           <span data-i18n="nav_home" class="text-[10px] font-bold">Beranda</span>
@@ -689,7 +703,7 @@
           href="#market"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <i class="fa-solid fa-chart-pie"></i>
           </div>
           <span data-i18n="nav_market" class="text-[10px] font-medium group-hover:font-semibold">Pasar</span>
@@ -700,7 +714,7 @@
           href="#trade"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <i class="fa-solid fa-money-bill-transfer"></i>
           </div>
           <span data-i18n="nav_trade" class="text-[10px] font-medium group-hover:font-semibold">Berdagang</span>
@@ -711,7 +725,7 @@
           href="#favorites"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <i class="fa-solid fa-star"></i>
           </div>
           <span data-i18n="nav_fav" class="text-[10px] font-medium group-hover:font-semibold">Favorit</span>
@@ -722,7 +736,7 @@
           href="#profile"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <i class="fa-solid fa-user"></i>
           </div>
           <span data-i18n="nav_profile" class="text-[10px] font-medium group-hover:font-semibold">Profil</span>
@@ -839,16 +853,16 @@
             this.iconSun.classList.add("hidden");
             this.iconMoon.classList.remove("hidden");
           }
-          // Trigger event for charts to update colors if needed
+          // Emit custom event agar Chart tahu tema berubah
           window.dispatchEvent(new Event("themeChanged"));
         }
       }
 
-      // --- 9.4 ApexCharts Manager (Squarish Box Logic & A11y Tooltip) ---
+      // --- 9.4 ApexCharts Manager (Squarish Box & A11y Tooltip) ---
       class ChartManager {
         constructor() {
           this.instances = {};
-          // Mock Data
+          // Realistic Mock Data
           this.data = {
             abx: [
               [1697072400000, 3100.5],
@@ -880,12 +894,13 @@
             ],
           };
         }
+
         render(elementId, seriesData, changePercent) {
           const el = document.getElementById(elementId);
           if (!el) return;
 
           const isBullish = changePercent >= 0;
-          // Get exact hex from Tailwind config logic to prevent mismatch
+          // Sync with Tailwind colors
           const themeColor = isBullish ? "#10B981" : "#EF4444";
 
           const options = {
@@ -905,24 +920,26 @@
             },
             colors: [themeColor],
             xaxis: { type: "datetime", crosshairs: { show: true, width: 1, position: "back" }, tooltip: { enabled: false } },
+            // Bounds prevention
             yaxis: { min: (min) => min * 0.995, max: (max) => max * 1.005 },
             tooltip: {
               fixed: { enabled: false },
               x: { show: false },
               marker: { show: false },
+              // Append to body automatically by Apexcharts, styling handled in CSS
               custom: function ({ series, seriesIndex, dataPointIndex, w }) {
                 const val = series[seriesIndex][dataPointIndex];
                 const time = w.globals.labels[dataPointIndex];
                 const dateStr = new Date(time).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
 
-                // Beautiful custom bubble that won't get cut off due to overflow:visible fix
+                // Custom DOM Tooltip
                 return `
-                            <div class="px-2 py-1.5 bg-white dark:bg-slate-800 border border-brand-silver dark:border-slate-600 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] rounded-lg text-center z-[9999] relative -translate-y-2">
-                                <div class="text-[9px] text-gray-400 dark:text-gray-400 font-bold mb-0.5 tracking-wide">${dateStr}</div>
-                                <div class="text-[11px] font-black" style="color: ${themeColor};">
-                                    Rp ${Utils.formatCurrency(val)}
-                                </div>
-                            </div>`;
+                  <div class="px-2.5 py-1.5 bg-white dark:bg-slate-800 border border-brand-silver/50 dark:border-slate-600 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.15)] rounded-lg text-center relative -translate-y-2">
+                      <div class="text-[9px] text-gray-400 dark:text-gray-400 font-bold mb-0.5 tracking-wide">${dateStr}</div>
+                      <div class="text-[11px] font-black" style="color: ${themeColor};">
+                          Rp ${Utils.formatCurrency(val)}
+                      </div>
+                  </div>`;
               },
             },
           };
@@ -932,11 +949,15 @@
           chart.render();
           this.instances[elementId] = chart;
         }
+
         renderAll() {
-          this.render("chart-abx", this.data.abx, 3.06);
-          this.render("chart-bisnis", this.data.bisnis, 1.34);
-          this.render("chart-composite", this.data.composite, 1.04);
-          this.render("chart-dbx", this.data.dbx, 1.12);
+          // Add small delay to ensure DOM is fully painted
+          setTimeout(() => {
+            this.render("chart-abx", this.data.abx, 3.06);
+            this.render("chart-bisnis", this.data.bisnis, 1.34);
+            this.render("chart-composite", this.data.composite, -0.45);
+            this.render("chart-dbx", this.data.dbx, 1.12);
+          }, 100);
         }
       }
 
@@ -949,12 +970,10 @@
           this.init();
         }
         init() {
-          // Render charts on load
-          setTimeout(() => {
-            this.charts.renderAll();
-          }, 100);
+          // Initial Render
+          this.charts.renderAll();
 
-          // Re-render on window resize to maintain layout
+          // Responsive Debounce
           window.addEventListener(
             "resize",
             Utils.debounce(() => {
@@ -962,13 +981,20 @@
             }, 250),
           );
 
-          // Micro-interactions (Ripple Effect)
+          // Theme Observer
+          window.addEventListener("themeChanged", () => {
+            this.charts.renderAll();
+          });
+
+          // Material Ripple Click Effect
           document.addEventListener("click", (e) => {
             const target = e.target.closest(".ripple-surface");
             if (!target) return;
+
             const rect = target.getBoundingClientRect();
             const diameter = Math.max(target.clientWidth, target.clientHeight);
             const radius = diameter / 2;
+
             const ripple = document.createElement("span");
             ripple.className = "ripple-circle";
             ripple.style.width = ripple.style.height = `${diameter}px`;
@@ -979,12 +1005,14 @@
             if (existing) existing.remove();
 
             target.appendChild(ripple);
+
+            // Clean DOM after animation
             setTimeout(() => ripple.remove(), 600);
           });
         }
       }
 
-      // Bootstrap App
+      // Boot application when DOM is ready
       document.addEventListener("DOMContentLoaded", () => {
         window.VerdhanaApp = new VerdhanaApp();
       });
