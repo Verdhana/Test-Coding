@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth antialiased" data-theme="light">
+  <head>
+    <!-- =======================================================================
+         1. META & SEO OPTIMIZATION
+         ======================================================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    <meta name="description" content="Verdhana Sekuritas - Platform Trading Enterprise & AI Portfolio Rebalancing" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <title>Verdhana Sekuritas</title>
+
+    <!-- =======================================================================
+         2. EXTERNAL LIBRARIES & FONTS (AS REQUESTED: RETAINING FONTAWESOME)
+         ======================================================================= -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- =======================================================================
+         3. TAILWIND CSS CONFIGURATION (EXACT MATCH VERDHANA COLORS)
+         ======================================================================= -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                red: "#D32F2F" /* EXACT CLIENT RED */,
+                darkred: "#B71C1C" /* EXACT CLIENT DARK RED */,
+                silver: "#E0E0E0" /* EXACT CLIENT SILVER */,
+                lightsilver: "#F8FAFC" /* EXACT CLIENT LIGHT SILVER */,
+                darksilver: "#94A3B8" /* EXACT CLIENT DARK SILVER */,
+              },
+              positive: "#10B981",
+              negative: "#EF4444",
+            },
+            boxShadow: {
+              /* Premium Multi-layered Shadows */
+              "premium-sm": "0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(0, 0, 0, 0.03)",
+              "premium-md": "0 12px 32px -4px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-glass": "0 8px 32px 0 rgba(31, 38, 135, 0.05)",
+              "premium-inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
+            },
+            keyframes: {
+              marquee: {
+                "0%": { transform: "translateX(100%)" },
+                "100%": { transform: "translateX(-100%)" },
+              },
+              slideUpFade: {
+                "0%": { opacity: "0", transform: "translateY(15px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              pulseSubtle: {
+                "0%, 100%": { opacity: "1", transform: "scale(1)" },
+                "50%": { opacity: "0.8", transform: "scale(1.05)" },
+              },
+            },
+            animation: {
+              marquee: "marquee 15s linear infinite",
+              slideUpFade: "slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              pulseSubtle: "pulseSubtle 2s ease-in-out infinite",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- =======================================================================
+         4. ENTERPRISE CSS ARCHITECTURE (POLISHING & RESPONSIVENESS)
+         ======================================================================= -->
+    <style>
+      /* --- 4.1 CSS VARIABLES & THEME TOKENS --- */
+      :root {
+        --bg-outer: #f1f5f9;
+        --bg-app: #ffffff;
+        --bg-glass: rgba(255, 255, 255, 0.85);
+        --border-glass: rgba(226, 232, 240, 0.6);
+
+        --text-main: #1f2937;
+        --text-muted: #64748b;
+
+        /* Custom easing for ultra-smooth transitions */
+        --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+        --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      html.dark {
+        --bg-outer: #020617;
+        --bg-app: #0f172a;
+        --bg-glass: rgba(15, 23, 42, 0.85);
+        --border-glass: rgba(30, 41, 59, 0.6);
+
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+      }
+
+      /* --- 4.2 BASE RESETS --- */
+      body {
+        background-color: var(--bg-outer);
+        transition: background-color 0.4s var(--ease-apple);
+        overscroll-behavior-y: none; /* Mencegah bounce effect di iOS */
+      }
+
+      /* Accessbility Focus Ring */
+      *:focus {
+        outline: none;
+      }
+      .focus-visible-ring:focus-visible {
+        outline: 2px solid #d32f2f;
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+
+      /* Safe area insets untuk iPhone Notch / Home Bar */
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 24px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+
+      /* Hidden Scrollbar Utility */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* --- 4.3 MICRO-INTERACTIONS & UTILITIES --- */
+      .glass-effect {
+        background-color: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-glass);
+      }
+
+      .hover-lift {
+        transition:
+          transform 0.3s var(--ease-spring),
+          box-shadow 0.3s var(--ease-apple);
+      }
+      .hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      }
+      .hover-lift:active {
+        transform: translateY(1px);
+      }
+
+      /* Ripple Effect Base */
+      .ripple-surface {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+      }
+      .ripple-circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(211, 47, 47, 0.15); /* Verdhana Red */
+        transform: scale(0);
+        animation: ripple-anim 0.6s linear forwards;
+        pointer-events: none;
+      }
+      @keyframes ripple-anim {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      /* ApexCharts Custom Tooltip Override */
+      .apexcharts-tooltip {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+      }
+      .apexcharts-xcrosshairs,
+      .apexcharts-ycrosshairs {
+        stroke: #94a3b8 !important;
+        stroke-dasharray: 4 !important;
+        stroke-width: 1px !important;
+      }
+
+      /* --- 4.4 RESPONSIVE FRAMING (DESKTOP MODE) --- */
+      /* Layar HP standar (hingga 480px) menggunakan 100% width, mx-auto dari Tailwind */
+
+      /* Tablet & Desktop: Mensimulasikan bezel HP */
+      @media screen and (min-width: 768px) {
+        .app-container {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          height: calc(100vh - 4rem);
+          border-radius: 2rem;
+          overflow: hidden;
+          box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            0 0 0 12px rgba(0, 0, 0, 0.03);
+          border: 1px solid var(--border-glass);
+        }
+        .bottom-nav-glass {
+          position: absolute !important;
+          border-bottom-left-radius: 2rem;
+          border-bottom-right-radius: 2rem;
+        }
+        body {
+          overflow-y: hidden;
+        } /* Cegah scroll ganda di desktop */
+        #main-viewport {
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+
+      @media screen and (min-width: 1024px) {
+        body {
+          background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px);
+          background-size: 32px 32px;
+        }
+        html.dark body {
+          background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-300">
+    <!-- =======================================================================
+         5. MAIN APPLICATION CONTAINER (FRAME)
+         ======================================================================= -->
+    <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-300">
+      <!-- ===================================================================
+             6. HEADER (UPGRADED: GLASSMORPHISM & PRECISE ALIGNMENT)
+             =================================================================== -->
+      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-4 pt-4 pb-3 flex items-center justify-between transition-colors duration-300">
+        <!-- Logo Asli Verdhana -->
+        <a href="#home" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 cursor-pointer focus-visible-ring p-1 -ml-1 group">
+          <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm group-hover:scale-105 transition-transform duration-300">V</span>
+          <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
+        </a>
+
+        <!-- Search Bar Polished -->
+        <div class="flex-1 mx-3" role="search">
+          <label for="global-search" class="sr-only">Cari saham</label>
+          <div
+            class="bg-brand-lightsilver dark:bg-slate-800 rounded-full flex items-center px-3.5 py-2 border border-transparent focus-within:border-brand-red/30 focus-within:ring-2 focus-within:ring-brand-red/10 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all duration-300 shadow-[var(--shadow-inner)]"
+          >
+            <i class="fa-solid fa-search text-brand-darksilver text-xs" aria-hidden="true"></i>
+            <input
+              id="global-search"
+              type="text"
+              data-i18n-placeholder="search_placeholder"
+              placeholder="Cari saham..."
+              class="bg-transparent border-none outline-none text-xs font-semibold w-full ml-2.5 text-gray-800 dark:text-white placeholder-brand-darksilver focus-visible-ring"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- Controls: Lang, Theme, Bell -->
+        <div class="flex items-center gap-3 shrink-0">
+          <!-- Select Lang -->
+          <div class="relative group">
+            <label for="lang-switcher" class="sr-only">Pilih Bahasa</label>
+            <select
+              id="lang-switcher"
+              onchange="window.VerdhanaApp.i18n.changeLang(this.value)"
+              class="bg-transparent text-[11px] font-bold text-gray-600 dark:text-gray-300 outline-none cursor-pointer appearance-none uppercase transition-colors hover:text-brand-red focus-visible-ring p-1"
+            >
+              <option value="id" class="dark:bg-slate-800">ID</option>
+              <option value="en" class="dark:bg-slate-800">EN</option>
+              <option value="zh" class="dark:bg-slate-800">ZH</option>
+            </select>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button onclick="window.VerdhanaApp.theme.toggle()" aria-label="Ganti Tema" class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-1">
+            <i id="theme-icon" class="fa-solid fa-moon text-sm" aria-hidden="true"></i>
+          </button>
+
+          <!-- Notification -->
+          <button aria-label="Notifikasi" class="relative focus-visible-ring text-gray-500 dark:text-gray-400 p-1 hover:text-brand-red dark:hover:text-brand-red transition-colors shrink-0 active:scale-90">
+            <i class="fa-solid fa-bell text-lg" aria-hidden="true"></i>
+            <span class="absolute top-[2px] right-[2px] w-2.5 h-2.5 bg-brand-red rounded-full border-2 border-white dark:border-slate-900 animate-pulseSubtle"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ===================================================================
+             7. MAIN VIEWPORT (Scrollable Content)
+             =================================================================== -->
+      <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[90px] no-scrollbar">
+        <!-- --- 7.1 BANNERS & MARQUEE --- -->
+        <section aria-label="Banner Promosi" class="p-4 opacity-0 animate-slideUpFade" style="animation-delay: 100ms">
+          <!-- Exact Snapshot Snap Carousel from Source, heavily polished -->
+          <div class="relative w-full rounded-2xl overflow-hidden shadow-premium-md hover-lift group" role="region" aria-roledescription="carousel">
+            <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar w-full h-full cursor-grab active:cursor-grabbing">
+              <div class="snap-center shrink-0 w-full relative ripple-surface">
+                <!-- Overlay tipis agar indikator terlihat jelas -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none"></div>
+                <img src="https://i.ibb.co/MDC2LRnW/image.png?2.0.1788839085359" alt="Banner 1" class="w-full aspect-[21/9] object-cover transition-transform duration-[4000ms] group-hover:scale-105" />
+              </div>
+              <div class="snap-center shrink-0 w-full relative ripple-surface">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10 pointer-events-none"></div>
+                <img src="https://i.ibb.co/kgRzp7Wd/image.png?2.0.1788839085359" alt="Banner 2" class="w-full aspect-[21/9] object-cover transition-transform duration-[4000ms] group-hover:scale-105" />
+              </div>
+            </div>
+            <!-- Indicator exact logic from source -->
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20" aria-hidden="true">
+              <div class="w-5 h-1.5 bg-brand-red rounded-full shadow-sm transition-all duration-300"></div>
+              <div class="w-1.5 h-1.5 bg-white/70 rounded-full transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <!-- Marquee Polished -->
+          <button
+            aria-label="Pengumuman"
+            class="ripple-surface focus-visible-ring w-full flex items-center gap-3 mt-4 bg-brand-lightsilver dark:bg-slate-800 rounded-xl px-4 py-3.5 border border-brand-silver/50 dark:border-slate-700 hover:border-brand-red/30 transition-all duration-300 shadow-premium-sm group cursor-pointer"
+          >
+            <i class="fa-solid fa-bullhorn text-brand-red text-sm shrink-0 drop-shadow-sm group-hover:-rotate-12 transition-transform duration-300" aria-hidden="true"></i>
+            <div class="w-full overflow-hidden relative flex items-center h-4">
+              <div aria-live="polite" data-i18n="marquee" class="whitespace-nowrap absolute text-[11px] font-semibold text-gray-600 dark:text-gray-300 animate-marquee tracking-wide">
+                Selamat datang di Verdhana Sekuritas. Platform AI Portfolio Rebalancing terbaik Anda.
+              </div>
+            </div>
+          </button>
+        </section>
+
+        <!-- --- 7.2 QUICK MENUS (EXACT ICONS, POLISHED ALIGNMENT) --- -->
+        <section aria-label="Menu Cepat" class="px-4 mb-5 opacity-0 animate-slideUpFade" style="animation-delay: 200ms">
+          <div class="flex justify-between items-start gap-1">
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
+                <i class="fa-solid fa-file-contract"></i>
+              </div>
+              <span data-i18n="menu_opsi" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Kontrak<br />Opsi</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <span data-i18n="menu_nego" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Pasar<br />Nego</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
+                <i class="fa-solid fa-building-columns"></i>
+              </div>
+              <span data-i18n="menu_ipo" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Beli<br />IPO</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
+                <i class="fa-solid fa-handshake"></i>
+              </div>
+              <span data-i18n="menu_otc" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">OTC<br />&nbsp;</span>
+            </button>
+
+            <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 hover:bg-brand-lightsilver dark:hover:bg-slate-800 transition-colors">
+              <div class="w-12 h-12 rounded-2xl bg-brand-lightsilver dark:bg-slate-800 text-brand-red flex items-center justify-center text-xl mb-2.5 border border-brand-silver/60 dark:border-slate-700 shadow-premium-sm hover-lift">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <span data-i18n="menu_cs" class="text-[10px] text-center text-gray-600 dark:text-gray-300 leading-tight font-bold tracking-wide transition-colors group-hover:text-brand-red">Layanan<br />CS</span>
+            </button>
+          </div>
+        </section>
+
+        <hr class="border-brand-silver/40 dark:border-slate-800 mx-4 transition-colors" aria-hidden="true" />
+        <!-- ===================================================================
+                 7.3 INDEKS GLOBAL & LOKAL (SQUARISH CARDS & HORIZONTAL SWIPE)
+                 =================================================================== -->
+        <section aria-labelledby="heading-indices" class="mt-6 opacity-0 animate-slideUpFade" style="animation-delay: 300ms">
+          <div class="px-4 flex items-center justify-between mb-3">
+            <div>
+              <h3 id="heading-indices" data-i18n="idx_title" class="text-sm font-bold text-gray-800 dark:text-white transition-colors tracking-tight">Indeks Global & Lokal</h3>
+              <p class="text-[9px] text-gray-400 dark:text-gray-500 font-semibold mt-0.5 uppercase tracking-widest">Pembaruan Real-Time</p>
+            </div>
+            <button data-i18n="idx_all" aria-label="Lihat Semua Indeks" class="focus-visible-ring flex items-center text-[10px] text-brand-red hover:text-brand-darkred font-bold transition-colors uppercase tracking-widest pb-0.5 group">
+              Semua
+              <i class="fa-solid fa-chevron-right text-[8px] ml-1 group-hover:translate-x-0.5 transition-transform duration-300"></i>
+            </button>
+          </div>
+
+          <!-- STATE MANAGEMENT: Horizontal Scroll Container -->
+          <div class="relative w-full">
+            <div id="real-data-grid" class="flex gap-3 overflow-x-auto snap-x px-4 pb-6 pt-1 no-scrollbar" style="overflow-y: visible !important" role="region" aria-label="Grafik Indeks Interaktif">
+              <!-- INDEX CARD 1: ABX -->
+              <button
+                aria-label="Indeks Acceleration Board, Nilai 3186 koma 86, Naik 3 koma 06 persen"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
+                style="overflow: visible !important"
+              >
+                <!-- Bagian Atas: Header & Data Harga -->
+                <div class="w-full">
+                  <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">Acceleration</h4>
+                  <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">ABX</div>
+
+                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
+                  <div class="flex items-center gap-2 mt-2 mb-2">
+                    <span class="text-[13px] font-bold text-positive tracking-tight" id="val-abx">3.186,86</span>
+                    <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+3,06%</span>
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Chart Wrapper (mt-auto menekan chart ke paling bawah) -->
+                <div id="chart-abx" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+              </button>
+
+              <!-- INDEX CARD 2: BISNIS_27 -->
+              <button
+                aria-label="Indeks Bisnis 27, Nilai 418 koma 79, Naik 1 koma 34 persen"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
+                style="overflow: visible !important"
+              >
+                <!-- Bagian Atas: Header & Data Harga -->
+                <div class="w-full">
+                  <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">JSX Bisnis 27</h4>
+                  <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">BISNIS_27</div>
+
+                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
+                  <div class="flex items-center gap-2 mt-2 mb-2">
+                    <span class="text-[13px] font-bold text-positive tracking-tight" id="val-bisnis">418,79</span>
+                    <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+1,34%</span>
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Chart Wrapper -->
+                <div id="chart-bisnis" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+              </button>
+
+              <!-- INDEX CARD 3: COMPOSITE (Negative Example) -->
+              <button
+                aria-label="Indeks Composite, Nilai 6093 koma 75, Turun 0 koma 45 persen"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
+                style="overflow: visible !important"
+              >
+                <!-- Bagian Atas: Header & Data Harga -->
+                <div class="w-full">
+                  <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">IDX Composite</h4>
+                  <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">COMPOSITE</div>
+
+                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
+                  <div class="flex items-center gap-2 mt-2 mb-2">
+                    <span class="text-[13px] font-bold text-negative tracking-tight" id="val-composite">6.093,75</span>
+                    <span class="text-[9px] font-bold text-negative bg-negative/10 px-1.5 py-0.5 rounded-md shadow-sm">-0,45%</span>
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Chart Wrapper -->
+                <div id="chart-composite" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+              </button>
+
+              <!-- INDEX CARD 4: DBX -->
+              <button
+                aria-label="Indeks DBX, Nilai 2869 koma 32, Naik 1 koma 12 persen"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
+                style="overflow: visible !important"
+              >
+                <!-- Bagian Atas: Header & Data Harga -->
+                <div class="w-full">
+                  <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">Development Board</h4>
+                  <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">DBX</div>
+
+                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
+                  <div class="flex items-center gap-2 mt-2 mb-2">
+                    <span class="text-[13px] font-bold text-positive tracking-tight" id="val-dbx">2.869,32</span>
+                    <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+1,12%</span>
+                  </div>
+                </div>
+
+                <!-- Bagian Bawah: Chart Wrapper -->
+                <div id="chart-dbx" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+                 7.4 SAHAM POPULER (LIST ROW DESIGN DENGAN WARNA ASLI KLIEN)
+                 =================================================================== -->
+        <section aria-labelledby="heading-stocks" class="mt-4 px-4 opacity-0 animate-slideUpFade" style="animation-delay: 400ms">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h3 id="heading-stocks" data-i18n="pop_title" class="text-sm font-bold text-gray-800 dark:text-white transition-colors tracking-tight">Saham Populer</h3>
+            </div>
+            <button aria-label="Lihat Semua Saham Populer" class="focus-visible-ring text-[11px] text-gray-400 hover:text-brand-red font-medium transition-colors p-1">
+              <i class="fa-solid fa-list-ul"></i>
+            </button>
+          </div>
+
+          <!-- Container Data -->
+          <div id="stocks-list-container" class="flex flex-col border-t border-brand-silver/40 dark:border-slate-800 transition-colors" role="list">
+            <!-- BBCA -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <!-- Logo Placeholder dengan warna biru BCA -->
+                <div
+                  class="w-10 h-10 rounded-full bg-[#005E9D]/10 text-[#005E9D] dark:bg-[#005E9D]/20 dark:text-[#38bdf8] font-bold flex items-center justify-center shrink-0 border border-[#005E9D]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  BCA
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">BBCA</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Bank Central Asia Tbk</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,15 L10,12 L20,14 L30,5 L40,8 L50,2" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">6.050,00</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+0,83%</div>
+              </div>
+            </div>
+
+            <!-- TLKM -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <!-- Logo Placeholder dengan warna merah Telkom -->
+                <div
+                  class="w-10 h-10 rounded-full bg-[#D32F2F]/10 text-[#D32F2F] dark:bg-[#D32F2F]/20 dark:text-[#fca5a5] font-bold flex items-center justify-center shrink-0 border border-[#D32F2F]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  TLK
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">TLKM</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Telkom Indonesia Tbk</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,18 L15,10 L25,12 L35,2 L50,0" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">2.320,00</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+2,65%</div>
+              </div>
+            </div>
+
+            <!-- BBRI -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <!-- Logo Placeholder dengan warna biru BRI -->
+                <div
+                  class="w-10 h-10 rounded-full bg-[#0B5C9F]/10 text-[#0B5C9F] dark:bg-[#0B5C9F]/20 dark:text-[#7dd3fc] font-bold flex items-center justify-center shrink-0 border border-[#0B5C9F]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  BRI
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">BBRI</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Bank Rakyat Indonesia</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,15 L20,10 L35,12 L50,3" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">3.100,00</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+2,31%</div>
+              </div>
+            </div>
+
+            <!-- ASII -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <div
+                  class="w-10 h-10 rounded-full bg-[#145298]/10 text-[#145298] dark:bg-[#145298]/20 dark:text-[#7dd3fc] font-bold flex items-center justify-center shrink-0 border border-[#145298]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  ASI
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">ASII</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Astra International Tbk</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,12 L15,14 L30,8 L50,5" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">4.820,00</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+0,42%</div>
+              </div>
+            </div>
+
+            <!-- PGAS (Negative Trend Example) -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-brand-silver/40 dark:border-slate-800 cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <div
+                  class="w-10 h-10 rounded-full bg-[#0089C4]/10 text-[#0089C4] dark:bg-[#0089C4]/20 dark:text-[#38bdf8] font-bold flex items-center justify-center shrink-0 border border-[#0089C4]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  PGA
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">PGAS</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Perusahaan Gas Negara</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,2 L15,5 L30,15 L40,12 L50,18" stroke="#EF4444" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">1.420,00</div>
+                <div class="text-[10px] font-bold text-negative mt-0.5 bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded shadow-sm">-1,39%</div>
+              </div>
+            </div>
+
+            <!-- BUMI -->
+            <div
+              role="listitem"
+              class="group flex items-center justify-between py-3.5 border-b border-transparent cursor-pointer hover:bg-brand-lightsilver dark:hover:bg-slate-800/50 active:bg-gray-100 dark:active:bg-slate-800 transition-colors rounded-xl px-2 -mx-2"
+            >
+              <div class="flex items-center gap-3 w-[45%]">
+                <div
+                  class="w-10 h-10 rounded-full bg-[#B75626]/10 text-[#B75626] dark:bg-[#B75626]/20 dark:text-[#fb923c] font-bold flex items-center justify-center shrink-0 border border-[#B75626]/20 text-[10px] transition-transform duration-300 group-hover:scale-110 shadow-sm"
+                >
+                  BUM
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[13px] font-bold text-gray-800 dark:text-white tracking-tight transition-colors group-hover:text-brand-red">BUMI</div>
+                  <div class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-28 transition-colors">PT Bumi Resources Tbk</div>
+                </div>
+              </div>
+              <div class="w-[20%] h-8 flex justify-center items-center opacity-70 group-hover:opacity-100 transition-opacity">
+                <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 50 20" preserveAspectRatio="none">
+                  <path d="M0,18 L10,10 L25,12 L35,2 L50,0" stroke="#10B981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+                </svg>
+              </div>
+              <div class="w-[35%] text-right flex flex-col items-end">
+                <div class="text-[13px] font-bold text-gray-800 dark:text-white transition-colors">180,00</div>
+                <div class="text-[10px] font-bold text-positive mt-0.5 bg-green-50 dark:bg-emerald-900/30 px-1.5 py-0.5 rounded shadow-sm">+3,45%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- END SCROLL VIEW -->
+
+      <!-- =======================================================================
+             8. BOTTOM NAVIGATION BAR (GLASSMORPHISM, FIXED)
+             ======================================================================= -->
+      <nav
+        aria-label="Navigasi Utama"
+        class="glass-effect bottom-nav-glass pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2 z-[9999] shadow-[0_-4px_15px_rgba(0,0,0,0.04)] transition-colors duration-500"
+      >
+        <!-- Beranda (Active) -->
+        <a href="#home" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+            <i class="fa-solid fa-house drop-shadow-sm"></i>
+          </div>
+          <span data-i18n="nav_home" class="text-[10px] font-bold">Beranda</span>
+        </a>
+
+        <!-- Pasar -->
+        <a
+          href="#market"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <span data-i18n="nav_market" class="text-[10px] font-medium group-hover:font-semibold">Pasar</span>
+        </a>
+
+        <!-- Berdagang -->
+        <a
+          href="#trade"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+          </div>
+          <span data-i18n="nav_trade" class="text-[10px] font-medium group-hover:font-semibold">Berdagang</span>
+        </a>
+
+        <!-- Favorit -->
+        <a
+          href="#favorites"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <span data-i18n="nav_fav" class="text-[10px] font-medium group-hover:font-semibold">Favorit</span>
+        </a>
+
+        <!-- Profil -->
+        <a
+          href="#profile"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
+        >
+          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-0.5">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <span data-i18n="nav_profile" class="text-[10px] font-medium group-hover:font-semibold">Profil</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- =======================================================================
+         9. ENTERPRISE JAVASCRIPT LOGIC (MODULAR & CLEAN)
+         ======================================================================= -->
+    <script>
+      "use strict";
+
+      // --- 9.1 Utilities ---
+      const Utils = {
+        debounce: (func, wait) => {
+          let timeout;
+          return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+          };
+        },
+        formatCurrency: (value) => {
+          return new Intl.NumberFormat("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+        },
+      };
+
+      // --- 9.2 I18n Manager (Menerjemahkan Teks) ---
+      class I18nManager {
+        constructor() {
+          this.dict = {
+            id: {
+              search_placeholder: "Cari saham...",
+              marquee: "Selamat datang di Verdhana Sekuritas. Platform AI Portfolio Rebalancing terbaik Anda.",
+              menu_opsi: "Kontrak<br>Opsi",
+              menu_nego: "Pasar<br>Nego",
+              menu_ipo: "Beli<br>IPO",
+              menu_otc: "OTC<br>&nbsp;",
+              menu_cs: "Layanan<br>CS",
+              idx_title: "Indeks Global & Lokal",
+              idx_all: "Semua",
+              pop_title: "Saham Populer",
+              nav_home: "Beranda",
+              nav_market: "Pasar",
+              nav_trade: "Berdagang",
+              nav_fav: "Favorit",
+              nav_profile: "Profil",
+            },
+            en: {
+              search_placeholder: "Search stocks...",
+              marquee: "Welcome to Verdhana Sekuritas. Your best AI Portfolio Rebalancing platform.",
+              menu_opsi: "Options<br>Contract",
+              menu_nego: "Negotiated<br>Market",
+              menu_ipo: "Buy<br>IPO",
+              menu_otc: "OTC<br>&nbsp;",
+              menu_cs: "Customer<br>Service",
+              idx_title: "Global & Local Indices",
+              idx_all: "All",
+              pop_title: "Popular Stocks",
+              nav_home: "Home",
+              nav_market: "Market",
+              nav_trade: "Trade",
+              nav_fav: "Favorites",
+              nav_profile: "Profile",
+            },
+            zh: {
+              search_placeholder: "搜索股票...",
+              marquee: "欢迎来到 Verdhana Sekuritas。您最好的 AI 投资组合重平衡平台。",
+              menu_opsi: "期权<br>合约",
+              menu_nego: "协议<br>市场",
+              menu_ipo: "购买<br>IPO",
+              menu_otc: "场外交易<br>&nbsp;",
+              menu_cs: "客户<br>服务",
+              idx_title: "全球及本地指数",
+              idx_all: "全部",
+              pop_title: "热门股票",
+              nav_home: "首页",
+              nav_market: "市场",
+              nav_trade: "交易",
+              nav_fav: "收藏",
+              nav_profile: "我的",
+            },
+          };
+        }
+        changeLang(lang) {
+          if (!this.dict[lang]) return;
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (this.dict[lang][key]) el.innerHTML = this.dict[lang][key];
+          });
+          document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+            const key = el.getAttribute("data-i18n-placeholder");
+            if (this.dict[lang][key]) el.setAttribute("placeholder", this.dict[lang][key]);
+          });
+        }
+      }
+
+      // --- 9.3 Theme Manager (Light/Dark Toggle) ---
+      class ThemeManager {
+        constructor() {
+          this.html = document.documentElement;
+          this.iconMoon = document.getElementById("icon-moon");
+          this.iconSun = document.getElementById("icon-sun");
+          this.isDark = this.html.classList.contains("dark");
+        }
+        toggle() {
+          this.isDark = !this.isDark;
+          if (this.isDark) {
+            this.html.classList.add("dark");
+            this.iconMoon.classList.add("hidden");
+            this.iconSun.classList.remove("hidden");
+          } else {
+            this.html.classList.remove("dark");
+            this.iconSun.classList.add("hidden");
+            this.iconMoon.classList.remove("hidden");
+          }
+          // Trigger event for charts to update colors if needed
+          window.dispatchEvent(new Event("themeChanged"));
+        }
+      }
+
+      // --- 9.4 ApexCharts Manager (Squarish Box Logic & A11y Tooltip) ---
+      class ChartManager {
+        constructor() {
+          this.instances = {};
+          // Mock Data
+          this.data = {
+            abx: [
+              [1697072400000, 3100.5],
+              [1697076000000, 3115.0],
+              [1697079600000, 3090.2],
+              [1697083200000, 3150.1],
+              [1697086800000, 3186.86],
+            ],
+            bisnis: [
+              [1697072400000, 405.1],
+              [1697076000000, 412.3],
+              [1697079600000, 408.0],
+              [1697083200000, 415.5],
+              [1697086800000, 418.79],
+            ],
+            composite: [
+              [1697072400000, 6010.2],
+              [1697076000000, 6035.5],
+              [1697079600000, 6020.1],
+              [1697083200000, 6080.0],
+              [1697086800000, 6093.75],
+            ],
+            dbx: [
+              [1697072400000, 2800.2],
+              [1697076000000, 2825.5],
+              [1697079600000, 2810.1],
+              [1697083200000, 2850.0],
+              [1697086800000, 2869.32],
+            ],
+          };
+        }
+        render(elementId, seriesData, changePercent) {
+          const el = document.getElementById(elementId);
+          if (!el) return;
+
+          const isBullish = changePercent >= 0;
+          // Get exact hex from Tailwind config logic to prevent mismatch
+          const themeColor = isBullish ? "#10B981" : "#EF4444";
+
+          const options = {
+            series: [{ name: "Value", data: seriesData }],
+            chart: {
+              type: "area",
+              height: "100%",
+              width: "100%",
+              sparkline: { enabled: true },
+              animations: { enabled: true, easing: "easeinout", speed: 800 },
+              parentHeightOffset: 0,
+            },
+            stroke: { curve: "smooth", width: 2.5 },
+            fill: {
+              type: "gradient",
+              gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0.0, stops: [0, 100] },
+            },
+            colors: [themeColor],
+            xaxis: { type: "datetime", crosshairs: { show: true, width: 1, position: "back" }, tooltip: { enabled: false } },
+            yaxis: { min: (min) => min * 0.995, max: (max) => max * 1.005 },
+            tooltip: {
+              fixed: { enabled: false },
+              x: { show: false },
+              marker: { show: false },
+              custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+                const val = series[seriesIndex][dataPointIndex];
+                const time = w.globals.labels[dataPointIndex];
+                const dateStr = new Date(time).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+
+                // Beautiful custom bubble that won't get cut off due to overflow:visible fix
+                return `
+                            <div class="px-2 py-1.5 bg-white dark:bg-slate-800 border border-brand-silver dark:border-slate-600 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] rounded-lg text-center z-[9999] relative -translate-y-2">
+                                <div class="text-[9px] text-gray-400 dark:text-gray-400 font-bold mb-0.5 tracking-wide">${dateStr}</div>
+                                <div class="text-[11px] font-black" style="color: ${themeColor};">
+                                    Rp ${Utils.formatCurrency(val)}
+                                </div>
+                            </div>`;
+              },
+            },
+          };
+
+          if (this.instances[elementId]) this.instances[elementId].destroy();
+          const chart = new ApexCharts(el, options);
+          chart.render();
+          this.instances[elementId] = chart;
+        }
+        renderAll() {
+          this.render("chart-abx", this.data.abx, 3.06);
+          this.render("chart-bisnis", this.data.bisnis, 1.34);
+          this.render("chart-composite", this.data.composite, 1.04);
+          this.render("chart-dbx", this.data.dbx, 1.12);
+        }
+      }
+
+      // --- 9.5 Core App Orchestrator ---
+      class VerdhanaApp {
+        constructor() {
+          this.i18n = new I18nManager();
+          this.theme = new ThemeManager();
+          this.charts = new ChartManager();
+          this.init();
+        }
+        init() {
+          // Render charts on load
+          setTimeout(() => {
+            this.charts.renderAll();
+          }, 100);
+
+          // Re-render on window resize to maintain layout
+          window.addEventListener(
+            "resize",
+            Utils.debounce(() => {
+              this.charts.renderAll();
+            }, 250),
+          );
+
+          // Micro-interactions (Ripple Effect)
+          document.addEventListener("click", (e) => {
+            const target = e.target.closest(".ripple-surface");
+            if (!target) return;
+            const rect = target.getBoundingClientRect();
+            const diameter = Math.max(target.clientWidth, target.clientHeight);
+            const radius = diameter / 2;
+            const ripple = document.createElement("span");
+            ripple.className = "ripple-circle";
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${e.clientX - rect.left - radius}px`;
+            ripple.style.top = `${e.clientY - rect.top - radius}px`;
+
+            const existing = target.querySelector(".ripple-circle");
+            if (existing) existing.remove();
+
+            target.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+          });
+        }
+      }
+
+      // Bootstrap App
+      document.addEventListener("DOMContentLoaded", () => {
+        window.VerdhanaApp = new VerdhanaApp();
+      });
+    </script>
+  </body>
+</html>
