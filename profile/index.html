@@ -35,15 +35,14 @@
             },
             colors: {
               brand: {
-                red: "#D32F2F" /* Verdhana Primary Red */,
-                darkred: "#B71C1C" /* Verdhana Dark Red */,
-                silver: "#E0E0E0",
+                red: "#D32F2F" /* Client Exact Red */,
+                darkred: "#B71C1C" /* Client Exact Dark Red */,
+                silver: "#E0E0E0" /* Client Exact Silver */,
                 lightsilver: "#F8FAFC",
                 darksilver: "#94A3B8",
               },
               positive: "#10B981",
               negative: "#EF4444",
-              /* Menu Icon Background Colors for Premium Look */
               menu: {
                 orange: { bg: "#ffedd5", text: "#ea580c", darkBg: "rgba(234, 88, 12, 0.15)", darkText: "#fdba74" },
                 red: { bg: "#fee2e2", text: "#dc2626", darkBg: "rgba(220, 38, 38, 0.15)", darkText: "#fca5a5" },
@@ -54,7 +53,7 @@
             },
             boxShadow: {
               "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
-              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03)",
               "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
             },
             keyframes: {
@@ -62,14 +61,14 @@
                 "0%": { opacity: "0", transform: "translateY(15px)" },
                 "100%": { opacity: "1", transform: "translateY(0)" },
               },
-              spinSlow: {
-                "0%": { transform: "rotate(0deg)" },
-                "100%": { transform: "rotate(360deg)" },
+              pulseSubtle: {
+                "0%, 100%": { opacity: "1", transform: "scale(1)" },
+                "50%": { opacity: "0.85", transform: "scale(1.05)" },
               },
             },
             animation: {
-              slideUpFade: "slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-              spinSlow: "spinSlow 1.5s linear infinite",
+              slideUpFade: "slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              pulseSubtle: "pulseSubtle 2.5s ease-in-out infinite",
             },
           },
         },
@@ -77,7 +76,7 @@
     </script>
 
     <!-- =======================================================================
-         4. ENTERPRISE CSS ARCHITECTURE
+         4. ENTERPRISE CSS ARCHITECTURE (POLISHED & RESPONSIVE)
          ======================================================================= -->
     <style>
       :root {
@@ -130,7 +129,6 @@
         background-color: var(--bg-glass);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border-glass);
       }
 
       .hover-lift {
@@ -148,7 +146,6 @@
         box-shadow: var(--tw-shadow-premium-sm);
       }
 
-      /* Ripple Effect */
       .ripple-surface {
         position: relative;
         overflow: hidden;
@@ -157,7 +154,7 @@
       .ripple-circle {
         position: absolute;
         border-radius: 50%;
-        background-color: rgba(211, 47, 47, 0.15);
+        background-color: rgba(211, 47, 47, 0.12);
         transform: scale(0);
         animation: ripple-anim 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
         pointer-events: none;
@@ -167,6 +164,22 @@
           transform: scale(4);
           opacity: 0;
         }
+      }
+
+      /* Seamless Select Validation */
+      .select-seamless {
+        appearance: none;
+        -webkit-appearance: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: 10;
       }
 
       /* Desktop Framing */
@@ -196,9 +209,10 @@
           overflow-y: auto;
         }
       }
+
       @media screen and (min-width: 1024px) {
         body {
-          background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px);
           background-size: 32px 32px;
         }
         html.dark body {
@@ -210,20 +224,20 @@
 
   <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-500 ease-in-out">
     <!-- =======================================================================
-         5. MAIN APPLICATION CONTAINER (FRAME)
+         5. MAIN APPLICATION CONTAINER (PROFILE PAGE)
          ======================================================================= -->
     <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-500 ease-in-out">
       <!-- ===================================================================
-             6. HEADER (PROFIL)
+             6. HEADER (PROFIL - MINIMAL & CLEAN)
              =================================================================== -->
-      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-5 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
-        <!-- Brand Mark -->
+      <header role="banner" class="glass-effect border-b border-brand-silver/60 dark:border-slate-700/60 pt-safe sticky top-0 z-[9998] px-5 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
+        <!-- Brand Logo -->
         <div class="flex items-baseline shrink-0">
           <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm">V</span>
           <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
         </div>
 
-        <!-- Controls (Theme & Notif) -->
+        <!-- Controls (Theme & Settings) -->
         <div class="flex items-center gap-2 shrink-0">
           <button
             onclick="window.VerdhanaProfile.toggleTheme()"
@@ -257,99 +271,97 @@
       </header>
 
       <!-- ===================================================================
-             7. MAIN VIEWPORT (PROFILE CONTENT)
+             7. MAIN VIEWPORT (BUG FIX: pb-[110px] prevents bottom overlap)
              =================================================================== -->
-      <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[90px] no-scrollbar">
-        <!-- --- 7.1 USER INFO IDENTIFICATION --- -->
+      <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[110px] no-scrollbar">
+        <!-- --- 7.1 USER INFO --- -->
         <section aria-label="Informasi Pengguna" class="px-5 pt-6 pb-4 opacity-0 animate-slideUpFade" style="animation-delay: 50ms">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <!-- Avatar -->
-              <div
-                class="relative w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-brand-red to-brand-darkred flex items-center justify-center text-white text-xl font-bold shadow-premium-sm shrink-0 border-2 border-white dark:border-slate-800"
-              >
-                N
-                <!-- VIP Badge (From Reference) -->
-                <div class="absolute -top-1 -right-2 w-6 h-6 bg-[#E0E7FF] dark:bg-slate-700 rounded-full flex items-center justify-center shadow-sm border border-white dark:border-slate-800">
-                  <svg class="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#A5B4FC]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.1L12 16.4l-6.3 4.7 2.3-7.1-6-4.6h7.6z" /></svg>
-                </div>
+          <div class="flex items-center gap-4">
+            <!-- Avatar with Hover Effect -->
+            <div
+              class="relative w-[56px] h-[56px] rounded-full bg-gradient-to-tr from-brand-red to-brand-darkred flex items-center justify-center text-white text-xl font-bold shadow-premium-sm shrink-0 border-[3px] border-white dark:border-slate-800 transition-transform duration-300 hover:scale-105 cursor-pointer"
+            >
+              N
+              <!-- VIP Badge -->
+              <div class="absolute -top-1 -right-2 w-6 h-6 bg-[#E0E7FF] dark:bg-slate-700 rounded-full flex items-center justify-center shadow-sm border border-white dark:border-slate-800">
+                <svg class="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#A5B4FC]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.1L12 16.4l-6.3 4.7 2.3-7.1-6-4.6h7.6z" /></svg>
               </div>
+            </div>
 
-              <!-- Account Details -->
-              <div class="flex flex-col">
-                <div class="flex items-center gap-2 mb-1">
-                  <h2 class="text-base font-black text-gray-800 dark:text-white tracking-tight">niaramdhan****7@gmail.com</h2>
-                  <!-- Hide/Show Icon -->
-                  <button aria-label="Sembunyikan email" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-                <!-- KYC Verified Badge -->
-                <div class="inline-flex items-center gap-1.5 bg-green-50 dark:bg-emerald-900/30 border border-green-200 dark:border-emerald-800/50 rounded-full px-2.5 py-1 w-max">
-                  <svg class="w-3 h-3 text-positive" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            <!-- Account Details -->
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2 mb-1.5">
+                <h2 class="text-[15px] font-black text-gray-800 dark:text-white tracking-tight">niaramdhan****7@gmail.com</h2>
+                <!-- Toggle Email Masking Icon -->
+                <button aria-label="Sembunyikan email" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded active:scale-90">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                    ></path>
                   </svg>
-                  <span class="text-[10px] font-bold text-positive tracking-wide">Sudah terdaftar dengan nama asli</span>
-                </div>
+                </button>
+              </div>
+              <div class="inline-flex items-center gap-1.5 bg-green-50 dark:bg-emerald-900/30 border border-green-200 dark:border-emerald-800/50 rounded-full px-2.5 py-1 w-max">
+                <svg class="w-3 h-3 text-positive" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span data-i18n="prof_kyc_status" class="text-[10px] font-bold text-positive tracking-wide">Sudah terdaftar nama asli</span>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- --- 7.2 ACTION BUTTONS (Deposit, Withdraw, Details) --- -->
-        <section aria-label="Aksi Keuangan" class="px-5 mb-6 opacity-0 animate-slideUpFade" style="animation-delay: 150ms">
-          <div class="flex justify-between items-start gap-3 bg-brand-lightsilver dark:bg-slate-800/50 p-4 rounded-2xl border border-brand-silver/50 dark:border-slate-700/50">
+        <!-- --- 7.2 ACTION BUTTONS --- -->
+        <section aria-label="Aksi Keuangan" class="px-5 mb-6 opacity-0 animate-slideUpFade" style="animation-delay: 100ms">
+          <div class="flex justify-between items-start gap-3 bg-brand-lightsilver dark:bg-slate-800/50 p-4 rounded-[1.25rem] border border-brand-silver/50 dark:border-slate-700/50 shadow-premium-sm hover-lift">
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
-              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
-                <!-- Download/Deposit Icon -->
-                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <div
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+              >
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
               </div>
-              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Pengisian<br />saldo</span>
+              <span data-i18n="prof_deposit" class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Pengisian<br />saldo</span>
             </button>
 
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
-              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
-                <!-- Upload/Withdraw Icon -->
-                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <div
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+              >
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                 </svg>
               </div>
-              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Penarikan<br />&nbsp;</span>
+              <span data-i18n="prof_withdraw" class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Penarikan<br />&nbsp;</span>
             </button>
 
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
-              <div class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm hover-lift">
-                <!-- Details/List Icon -->
-                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                </svg>
+              <div
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+              >
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
               </div>
-              <span class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Rincian<br />&nbsp;</span>
+              <span data-i18n="prof_details" class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Rincian<br />&nbsp;</span>
             </button>
           </div>
         </section>
 
-        <!-- --- 7.3 MAIN ASSETS CARD (PREMIUM DESIGN) --- -->
-        <section aria-label="Ringkasan Aset" class="px-5 mb-8 opacity-0 animate-slideUpFade" style="animation-delay: 250ms">
-          <div class="relative bg-white dark:bg-slate-800 rounded-3xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-md overflow-hidden">
-            <!-- Decorative Gradient Background (Subtle) -->
+        <!-- --- 7.3 MAIN ASSETS CARD --- -->
+        <section aria-label="Ringkasan Aset" class="px-5 mb-8 opacity-0 animate-slideUpFade" style="animation-delay: 200ms">
+          <div class="relative bg-white dark:bg-slate-800 rounded-[1.5rem] border border-brand-silver/50 dark:border-slate-700 shadow-premium-md overflow-hidden hover-lift">
+            <!-- Subtle Mesh Gradient -->
             <div class="absolute inset-0 bg-gradient-to-br from-brand-red/5 to-transparent pointer-events-none"></div>
 
             <div class="relative z-10 p-5">
-              <!-- Card Header -->
+              <!-- Header Card -->
               <div class="flex items-center justify-between mb-6">
-                <h3 class="text-sm font-black text-gray-800 dark:text-white tracking-tight">Aset Saya</h3>
+                <h3 data-i18n="prof_asset_title" class="text-sm font-black text-gray-800 dark:text-white tracking-tight">Aset Saya</h3>
                 <button id="btn-refresh-assets" aria-label="Perbarui data" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded-full p-1 active:scale-90">
-                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                   </svg>
                 </button>
@@ -358,9 +370,10 @@
               <!-- Main Balance -->
               <div class="mb-6">
                 <div class="flex items-center gap-2 mb-1.5">
-                  <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Dana yang tersedia (Rp)</span>
-                  <button id="btn-toggle-balance" aria-label="Tampilkan saldo" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded px-1">
-                    <svg class="w-3.5 h-3.5" id="icon-eye-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <span data-i18n="prof_available" class="text-xs font-semibold text-gray-500 dark:text-gray-400">Dana yang tersedia (Rp)</span>
+                  <!-- Toggle Balance Button -->
+                  <button id="btn-toggle-balance" aria-label="Tampilkan saldo" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded px-1 active:scale-90">
+                    <svg class="w-4 h-4" id="icon-eye-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -368,61 +381,54 @@
                         d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
                       ></path>
                     </svg>
-                    <svg class="w-3.5 h-3.5 hidden" id="icon-eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-4 h-4 hidden" id="icon-eye-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                     </svg>
                   </button>
                 </div>
-                <div class="text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none mb-2 data-balance" data-value="125000000">***</div>
-                <div class="text-[11px] font-semibold text-gray-500 dark:text-gray-400">Dana yang dibekukan: <span class="text-gray-700 dark:text-gray-300 font-bold data-balance" data-value="500000">***</span></div>
+                <div class="text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none mb-2.5 data-balance transition-all" data-value="125000000">***</div>
+                <div class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 flex items-center">
+                  <span data-i18n="prof_frozen">Dana yang dibekukan:</span> <span class="text-gray-700 dark:text-gray-300 font-bold data-balance ml-1" data-value="500000">***</span>
+                </div>
               </div>
 
-              <!-- Statistics Grid (2 Columns) -->
+              <!-- 2-Column Statistics -->
               <div class="grid grid-cols-2 gap-y-5 gap-x-4 pt-5 border-t border-brand-silver/60 dark:border-slate-700/80">
-                <!-- Stat 1 -->
                 <div class="flex flex-col">
-                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Total aset</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="125500000">***</span>
+                  <span data-i18n="prof_total_asset" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Total aset</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="125500000">***</span>
                 </div>
-
-                <!-- Stat 2 -->
                 <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
-                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Dana yang digunakan</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="45000000">***</span>
+                  <span data-i18n="prof_used" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Dana yang digunakan</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="45000000">***</span>
                 </div>
-
-                <!-- Stat 3 -->
                 <div class="flex flex-col">
                   <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">P&L</span>
-                  <span class="text-sm font-black text-positive data-balance" data-value="2450000" data-sign="+">***</span>
+                  <span class="text-sm font-black text-positive data-balance transition-all" data-value="2450000" data-sign="+">***</span>
                 </div>
-
-                <!-- Stat 4 -->
                 <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
                   <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Equity</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="127950000">***</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="127950000">***</span>
                 </div>
-
-                <!-- Stat 5 -->
                 <div class="flex flex-col">
-                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Tunggakan</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance" data-value="0">***</span>
+                  <span data-i18n="prof_arrears" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Tunggakan</span>
+                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="0">***</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <!-- --- 7.4 NAVIGATION MENU LIST (KYC, Bank, Password, Company, Lang, Logout) --- -->
-        <section aria-label="Menu Akun" class="px-5 mb-8 opacity-0 animate-slideUpFade" style="animation-delay: 350ms">
-          <div class="bg-white dark:bg-slate-800 rounded-3xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm overflow-hidden flex flex-col divide-y divide-brand-silver/40 dark:divide-slate-700/60">
-            <!-- Item 1: Verifikasi KYC -->
+
+        <!-- --- 7.4 NAVIGATION MENU LIST --- -->
+        <section aria-label="Menu Akun" class="px-5 opacity-0 animate-slideUpFade" style="animation-delay: 300ms">
+          <div class="bg-white dark:bg-slate-800 rounded-3xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm overflow-hidden flex flex-col divide-y divide-brand-silver/40 dark:divide-slate-700/60 mb-6">
             <a href="#kyc" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex items-center gap-3.5">
                 <div
-                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-orange-bg,theme('colors.menu.orange.bg'))] dark:bg-[color:var(--color-menu-orange-darkBg,theme('colors.menu.orange.darkBg'))] text-[color:var(--color-menu-orange-text,theme('colors.menu.orange.text'))] dark:text-[color:var(--color-menu-orange-darkText,theme('colors.menu.orange.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-orange-bg,theme('colors.menu.orange.bg'))] dark:bg-[color:var(--color-menu-orange-darkBg,theme('colors.menu.orange.darkBg'))] text-[color:var(--color-menu-orange-text,theme('colors.menu.orange.text'))] dark:text-[color:var(--color-menu-orange-darkText,theme('colors.menu.orange.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110"
                 >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -431,111 +437,116 @@
                     ></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Verifikasi KYC</span>
+                <span data-i18n="menu_kyc" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Verifikasi KYC</span>
               </div>
-              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </a>
 
-            <!-- Item 2: Akun Bank -->
             <a href="#bank" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex items-center gap-3.5">
                 <div
-                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-red-bg,theme('colors.menu.red.bg'))] dark:bg-[color:var(--color-menu-red-darkBg,theme('colors.menu.red.darkBg'))] text-[color:var(--color-menu-red-text,theme('colors.menu.red.text'))] dark:text-[color:var(--color-menu-red-darkText,theme('colors.menu.red.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-red-bg,theme('colors.menu.red.bg'))] dark:bg-[color:var(--color-menu-red-darkBg,theme('colors.menu.red.darkBg'))] text-[color:var(--color-menu-red-text,theme('colors.menu.red.text'))] dark:text-[color:var(--color-menu-red-darkText,theme('colors.menu.red.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110"
                 >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Akun bank</span>
+                <span data-i18n="menu_bank" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Akun bank</span>
               </div>
-              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </a>
 
-            <!-- Item 3: Kata Sandi Penarikan -->
             <a href="#withdraw-password" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex items-center gap-3.5">
                 <div
-                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-blue-bg,theme('colors.menu.blue.bg'))] dark:bg-[color:var(--color-menu-blue-darkBg,theme('colors.menu.blue.darkBg'))] text-[color:var(--color-menu-blue-text,theme('colors.menu.blue.text'))] dark:text-[color:var(--color-menu-blue-darkText,theme('colors.menu.blue.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-blue-bg,theme('colors.menu.blue.bg'))] dark:bg-[color:var(--color-menu-blue-darkBg,theme('colors.menu.blue.darkBg'))] text-[color:var(--color-menu-blue-text,theme('colors.menu.blue.text'))] dark:text-[color:var(--color-menu-blue-darkText,theme('colors.menu.blue.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110"
                 >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Kata sandi penarikan</span>
+                <span data-i18n="menu_pwd_withdraw" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Kata sandi penarikan</span>
               </div>
-              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </a>
 
-            <!-- Item 4: Ubah Kata Sandi Masuk -->
             <a href="#login-password" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex items-center gap-3.5">
                 <div
-                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-cyan-bg,theme('colors.menu.cyan.bg'))] dark:bg-[color:var(--color-menu-cyan-darkBg,theme('colors.menu.cyan.darkBg'))] text-[color:var(--color-menu-cyan-text,theme('colors.menu.cyan.text'))] dark:text-[color:var(--color-menu-cyan-darkText,theme('colors.menu.cyan.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-cyan-bg,theme('colors.menu.cyan.bg'))] dark:bg-[color:var(--color-menu-cyan-darkBg,theme('colors.menu.cyan.darkBg'))] text-[color:var(--color-menu-cyan-text,theme('colors.menu.cyan.text'))] dark:text-[color:var(--color-menu-cyan-darkText,theme('colors.menu.cyan.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110"
                 >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Ubah kata sandi masuk</span>
+                <span data-i18n="menu_pwd_login" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Ubah kata sandi masuk</span>
               </div>
-              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </a>
 
-            <!-- Item 5: Pengenalan Perusahaan -->
             <a href="#company" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
               <div class="flex items-center gap-3.5">
                 <div
-                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-purple-bg,theme('colors.menu.purple.bg'))] dark:bg-[color:var(--color-menu-purple-darkBg,theme('colors.menu.purple.darkBg'))] text-[color:var(--color-menu-purple-text,theme('colors.menu.purple.text'))] dark:text-[color:var(--color-menu-purple-darkText,theme('colors.menu.purple.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110"
+                  class="w-10 h-10 rounded-2xl bg-[color:var(--color-menu-purple-bg,theme('colors.menu.purple.bg'))] dark:bg-[color:var(--color-menu-purple-darkBg,theme('colors.menu.purple.darkBg'))] text-[color:var(--color-menu-purple-text,theme('colors.menu.purple.text'))] dark:text-[color:var(--color-menu-purple-darkText,theme('colors.menu.purple.darkText'))] flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110"
                 >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Pengenalan Perusahaan</span>
+                <span data-i18n="menu_company" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Pengenalan Perusahaan</span>
               </div>
-              <div class="flex items-center text-gray-400 group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </a>
 
-            <!-- Item 6: Bahasa -->
-            <a href="#language" class="ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors">
-              <div class="flex items-center gap-3.5">
-                <div class="w-10 h-10 rounded-2xl bg-brand-lightsilver dark:bg-slate-700 text-gray-600 dark:text-gray-300 flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <!-- Seamless Multi-Language Selector -->
+            <div class="relative ripple-surface focus-visible-ring group flex items-center justify-between p-4 hover:bg-brand-lightsilver dark:hover:bg-slate-700/50 transition-colors cursor-pointer">
+              <select id="profile-lang-switcher" aria-label="Pilih Bahasa" onchange="window.VerdhanaProfile.i18n.changeLang(this.value)" class="select-seamless">
+                <option value="id">Bahasa Indonesia</option>
+                <option value="en">English</option>
+                <option value="zh">中文</option>
+              </select>
+
+              <div class="flex items-center gap-3.5 pointer-events-none">
+                <div class="w-10 h-10 rounded-2xl bg-brand-silver/50 dark:bg-slate-700 text-gray-700 dark:text-gray-300 flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Bahasa</span>
+                <span data-i18n="menu_lang" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Bahasa</span>
               </div>
-              <div class="flex items-center gap-2 text-gray-400">
-                <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">Bahasa Indonesia</span>
-                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <div class="flex items-center gap-2 text-gray-400 pointer-events-none">
+                <span id="current-lang-display" class="text-[11px] font-bold text-brand-red">Bahasa Indonesia</span>
+                <svg class="w-4 h-4 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
                 </svg>
               </div>
-            </a>
+            </div>
 
-            <!-- Item 7: Keluar -->
-            <button onclick="alert('Keluar akun berhasil!')" class="ripple-surface focus-visible-ring w-full group flex items-center justify-between p-4 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors text-left">
+            <!-- Secure Logout Action -->
+            <button
+              onclick="alert('Sesi Anda telah berakhir.')"
+              class="ripple-surface focus-visible-ring w-full group flex items-center justify-between p-4 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors text-left relative z-10"
+            >
               <div class="flex items-center gap-3.5">
-                <div class="w-10 h-10 rounded-2xl bg-red-100 dark:bg-red-900/30 text-brand-red flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-110">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div class="w-10 h-10 rounded-2xl bg-red-100 dark:bg-red-900/40 text-brand-red flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                   </svg>
                 </div>
-                <span class="text-sm font-bold text-brand-red tracking-tight">Keluar</span>
+                <span data-i18n="menu_logout" class="text-sm font-bold text-brand-red tracking-tight">Keluar</span>
               </div>
-              <div class="flex items-center text-brand-red group-hover:translate-x-1 transition-transform">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+              <div class="text-brand-red group-hover:translate-x-1.5 transition-all duration-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </button>
           </div>
@@ -544,21 +555,25 @@
       <!-- END MAIN VIEWPORT -->
 
       <!-- ===================================================================
-             8. BOTTOM NAVIGATION BAR (PROFILE ACTIVE)
+             8. BOTTOM NAVIGATION BAR (FIXED, EXACT SVG SOLID CLONE)
              =================================================================== -->
       <nav
         aria-label="Navigasi Utama"
-        class="glass-effect bottom-nav-glass pb-safe absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.03)] transition-colors duration-500"
+        class="glass-effect bottom-nav-glass pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transition-colors duration-500"
       >
         <!-- Beranda -->
         <a
-          href="Verdhana_Sek V.2_2.html"
+          href="#"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
-            <i class="fa-solid fa-house"></i>
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.99 9a.75.75 0 1 1-1.06 1.061l-1.21-1.22v7.568a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0-.75.75v4.5a.75.75 0 0 1-.75.75H5.25a.75.75 0 0 1-.75-.75v-7.568l-1.21 1.22a.75.75 0 1 1-1.06-1.06l8.99-9Z"
+              />
+            </svg>
           </div>
-          <span class="text-[10px] font-medium group-hover:font-semibold">Beranda</span>
+          <span data-i18n="nav_home" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Beranda</span>
         </a>
 
         <!-- Pasar -->
@@ -566,10 +581,13 @@
           href="#market"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
-            <i class="fa-solid fa-chart-pie"></i>
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.96 6.84l-4.56 4.56v5.85a8.25 8.25 0 0 1-8.65-8.65h5.85l4.56-4.56a8.25 8.25 0 0 1 2.8 2.8Z" />
+              <path d="M13.5 3.16v6.59l4.66-4.66a8.25 8.25 0 0 0-4.66-1.93Z" />
+            </svg>
           </div>
-          <span class="text-[10px] font-medium group-hover:font-semibold">Pasar</span>
+          <span data-i18n="nav_market" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Pasar</span>
         </a>
 
         <!-- Berdagang -->
@@ -577,10 +595,14 @@
           href="#trade"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
-            <i class="fa-solid fa-money-bill-transfer"></i>
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M535 41c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l64 64c4.5 4.5 7 10.6 7 17s-2.5 12.5-7 17l-64 64c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l23-23L384 96c-17.7 0-32-14.3-32-32s14.3-32 32-32l174.1 0L535 41zM105 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-64-64c-4.5-4.5-7-10.6-7-17s2.5-12.5 7-17l64-64c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-23 23L256 416c17.7 0 32 14.3 32 32s-14.3 32-32 32l-174.1 0L105 471zM224 256c0-35.3 28.7-64 64-64l64 0c35.3 0 64 28.7 64 64s-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64zM160 304c0 10.1 2.1 19.6 5.8 28.2L96 352c-17.7 0-32-14.3-32-32l0-128c0-17.7 14.3-32 32-32l448 0c17.7 0 32 14.3 32 32l0 128c0 17.7-14.3 32-32 32l-69.8-19.8c3.7-8.6 5.8-18.1 5.8-28.2l0-64c0-53-43-96-96-96l-64 0c-53 0-96 43-96 96l0 64z"
+              />
+            </svg>
           </div>
-          <span class="text-[10px] font-medium group-hover:font-semibold">Berdagang</span>
+          <span data-i18n="nav_trade" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Berdagang</span>
         </a>
 
         <!-- Favorit -->
@@ -588,31 +610,132 @@
           href="#favorites"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
-            <i class="fa-solid fa-star"></i>
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.24l2.85 5.77 6.37.93-4.61 4.49 1.09 6.34L12 16.76l-5.7 3.01 1.09-6.34-4.61-4.49 6.37-.93L12 2.24z" />
+            </svg>
           </div>
-          <span class="text-[10px] font-medium group-hover:font-semibold">Favorit</span>
+          <span data-i18n="nav_fav" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Favorit</span>
         </a>
 
-        <!-- Profil (Active) -->
+        <!-- Profil (Aktif - Merah Verdhana) -->
         <a href="#profile" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
-          <div class="text-[20px] mb-1 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
-            <i class="fa-solid fa-user drop-shadow-sm"></i>
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" />
+            </svg>
           </div>
-          <span class="text-[10px] font-bold">Profil</span>
+          <span data-i18n="nav_profile" class="text-[11px] font-bold text-center w-full">Profil</span>
         </a>
       </nav>
     </main>
 
     <!-- ===================================================================
-         9. PROFILE JAVASCRIPT LOGIC (SENSITIVE DATA MASKING & STATE)
+         9. PROFILE JAVASCRIPT LOGIC (I18N & STATE)
          =================================================================== -->
     <script>
       "use strict";
 
+      class I18nProfile {
+        constructor() {
+          this.dict = {
+            id: {
+              prof_kyc_status: "Sudah terdaftar nama asli",
+              prof_deposit: "Pengisian<br/>saldo",
+              prof_withdraw: "Penarikan<br/>&nbsp;",
+              prof_details: "Rincian<br/>&nbsp;",
+              prof_asset_title: "Aset Saya",
+              prof_available: "Dana yang tersedia (Rp)",
+              prof_frozen: "Dana yang dibekukan:",
+              prof_total_asset: "Total aset",
+              prof_used: "Dana yang digunakan",
+              prof_arrears: "Tunggakan",
+              menu_kyc: "Verifikasi KYC",
+              menu_bank: "Akun bank",
+              menu_pwd_withdraw: "Kata sandi penarikan",
+              menu_pwd_login: "Ubah kata sandi masuk",
+              menu_company: "Pengenalan Perusahaan",
+              menu_lang: "Bahasa",
+              menu_logout: "Keluar",
+              nav_home: "Beranda",
+              nav_market: "Pasar",
+              nav_trade: "Berdagang",
+              nav_fav: "Favorit",
+              nav_profile: "Profil",
+              lang_display: "Bahasa Indonesia",
+            },
+            en: {
+              prof_kyc_status: "Real-name verified",
+              prof_deposit: "Deposit<br/>funds",
+              prof_withdraw: "Withdraw<br/>funds",
+              prof_details: "Details<br/>&nbsp;",
+              prof_asset_title: "My Assets",
+              prof_available: "Available funds (Rp)",
+              prof_frozen: "Frozen funds:",
+              prof_total_asset: "Total assets",
+              prof_used: "Used funds",
+              prof_arrears: "Arrears",
+              menu_kyc: "KYC Verification",
+              menu_bank: "Bank account",
+              menu_pwd_withdraw: "Withdrawal password",
+              menu_pwd_login: "Login password",
+              menu_company: "Company Profile",
+              menu_lang: "Language",
+              menu_logout: "Log out",
+              nav_home: "Home",
+              nav_market: "Market",
+              nav_trade: "Trade",
+              nav_fav: "Favorites",
+              nav_profile: "Profile",
+              lang_display: "English",
+            },
+            zh: {
+              prof_kyc_status: "实名认证",
+              prof_deposit: "充值<br/>&nbsp;",
+              prof_withdraw: "提现<br/>&nbsp;",
+              prof_details: "明细<br/>&nbsp;",
+              prof_asset_title: "我的资产",
+              prof_available: "可用资金 (Rp)",
+              prof_frozen: "冻结资金:",
+              prof_total_asset: "总资产",
+              prof_used: "已用资金",
+              prof_arrears: "欠款",
+              menu_kyc: "KYC 认证",
+              menu_bank: "银行账户",
+              menu_pwd_withdraw: "提现密码",
+              menu_pwd_login: "登录密码",
+              menu_company: "公司简介",
+              menu_lang: "语言",
+              menu_logout: "退出",
+              nav_home: "首页",
+              nav_market: "市场",
+              nav_trade: "交易",
+              nav_fav: "收藏",
+              nav_profile: "我的",
+              lang_display: "中文",
+            },
+          };
+        }
+
+        changeLang(lang) {
+          if (!this.dict[lang]) return;
+
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (this.dict[lang][key]) el.innerHTML = this.dict[lang][key];
+          });
+
+          const langDisplay = document.getElementById("current-lang-display");
+          if (langDisplay && this.dict[lang].lang_display) {
+            langDisplay.textContent = this.dict[lang].lang_display;
+          }
+        }
+      }
+
       class VerdhanaProfileApp {
         constructor() {
           this.isBalanceVisible = false;
+          this.i18n = new I18nProfile();
           this.init();
         }
 
@@ -694,7 +817,6 @@
         }
       }
 
-      // Bootstrap Profile App
       document.addEventListener("DOMContentLoaded", () => {
         window.VerdhanaProfile = new VerdhanaProfileApp();
       });
