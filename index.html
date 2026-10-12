@@ -395,18 +395,16 @@
               <i class="fa-solid fa-chevron-right text-[8px] ml-1 group-hover:translate-x-0.5 transition-transform duration-300"></i>
             </button>
           </div>
-
           <!-- STATE MANAGEMENT: Horizontal Scroll Container -->
           <div class="relative w-full">
-            <div id="real-data-grid" class="flex gap-3 overflow-x-auto snap-x px-4 pb-6 pt-1 no-scrollbar" style="overflow-y: visible !important" role="region" aria-label="Grafik Indeks Interaktif">
+            <div id="real-data-grid" class="flex gap-3 overflow-x-auto snap-x px-4 pb-6 pt-1 no-scrollbar" role="region" aria-label="Grafik Indeks Interaktif">
               <!-- INDEX CARD 1: ABX -->
               <button
                 aria-label="Indeks Acceleration Board, Nilai 3186 koma 86, Naik 3 koma 06 persen"
-                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
-                style="overflow: visible !important"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative overflow-hidden"
               >
-                <!-- Bagian Atas: Header & Data Harga -->
-                <div class="w-full">
+                <!-- Bagian Atas: Header & Data Harga (Z-Index 10 agar di atas grafik) -->
+                <div class="relative z-10 w-full p-3.5 pb-0">
                   <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">Acceleration</h4>
                   <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">ABX</div>
 
@@ -417,74 +415,71 @@
                   </div>
                 </div>
 
-                <!-- Bagian Bawah: Chart Wrapper (mt-auto menekan chart ke paling bawah) -->
-                <div id="chart-abx" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+                <!-- Bagian Bawah: Chart Wrapper (Absolute Bottom, Z-Index 0) -->
+                <div class="absolute bottom-0 left-0 w-full h-[65px] z-0 pointer-events-none">
+                  <!-- Melebarkan sedikit margin grafik agar stroke tidak terpotong di tepi kiri/kanan -->
+                  <div id="chart-abx" class="w-[102%] h-full relative -left-[1%]" aria-hidden="true"></div>
+                </div>
               </button>
 
               <!-- INDEX CARD 2: BISNIS_27 -->
               <button
                 aria-label="Indeks Bisnis 27, Nilai 418 koma 79, Naik 1 koma 34 persen"
-                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
-                style="overflow: visible !important"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative overflow-hidden"
               >
-                <!-- Bagian Atas: Header & Data Harga -->
-                <div class="w-full">
+                <div class="relative z-10 w-full p-3.5 pb-0">
                   <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">JSX Bisnis 27</h4>
                   <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">BISNIS_27</div>
 
-                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
                   <div class="flex items-center gap-2 mt-2 mb-2">
                     <span class="text-[13px] font-bold text-positive tracking-tight" id="val-bisnis">418,79</span>
                     <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+1,34%</span>
                   </div>
                 </div>
 
-                <!-- Bagian Bawah: Chart Wrapper -->
-                <div id="chart-bisnis" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+                <div class="absolute bottom-0 left-0 w-full h-[65px] z-0 pointer-events-none">
+                  <div id="chart-bisnis" class="w-[102%] h-full relative -left-[1%]" aria-hidden="true"></div>
+                </div>
               </button>
 
               <!-- INDEX CARD 3: COMPOSITE (Negative Example) -->
               <button
                 aria-label="Indeks Composite, Nilai 6093 koma 75, Turun 0 koma 45 persen"
-                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
-                style="overflow: visible !important"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative overflow-hidden"
               >
-                <!-- Bagian Atas: Header & Data Harga -->
-                <div class="w-full">
+                <div class="relative z-10 w-full p-3.5 pb-0">
                   <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">IDX Composite</h4>
                   <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">COMPOSITE</div>
 
-                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
                   <div class="flex items-center gap-2 mt-2 mb-2">
                     <span class="text-[13px] font-bold text-negative tracking-tight" id="val-composite">6.093,75</span>
                     <span class="text-[9px] font-bold text-negative bg-negative/10 px-1.5 py-0.5 rounded-md shadow-sm">-0,45%</span>
                   </div>
                 </div>
 
-                <!-- Bagian Bawah: Chart Wrapper -->
-                <div id="chart-composite" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+                <div class="absolute bottom-0 left-0 w-full h-[65px] z-0 pointer-events-none">
+                  <div id="chart-composite" class="w-[102%] h-full relative -left-[1%]" aria-hidden="true"></div>
+                </div>
               </button>
 
               <!-- INDEX CARD 4: DBX -->
               <button
                 aria-label="Indeks DBX, Nilai 2869 koma 32, Naik 1 koma 12 persen"
-                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative"
-                style="overflow: visible !important"
+                class="ripple-surface focus-visible-ring outline-none text-left group hover-lift min-w-[150px] w-[150px] h-[150px] shrink-0 snap-start bg-white dark:bg-slate-800 rounded-2xl border border-brand-silver/50 dark:border-slate-700 shadow-premium-sm flex flex-col transition-colors duration-300 relative overflow-hidden"
               >
-                <!-- Bagian Atas: Header & Data Harga -->
-                <div class="w-full">
+                <div class="relative z-10 w-full p-3.5 pb-0">
                   <h4 class="text-[9px] text-gray-400 dark:text-gray-500 font-bold truncate uppercase tracking-widest leading-none mb-1.5 opacity-90">Development Board</h4>
                   <div class="text-xs font-bold text-gray-800 dark:text-white transition-colors group-hover:text-brand-red">DBX</div>
 
-                  <!-- Nominal Harga & Persentase (Pindah ke Atas + Flexbox Horizontal) -->
                   <div class="flex items-center gap-2 mt-2 mb-2">
                     <span class="text-[13px] font-bold text-positive tracking-tight" id="val-dbx">2.869,32</span>
                     <span class="text-[9px] font-bold text-positive bg-positive/10 px-1.5 py-0.5 rounded-md shadow-sm">+1,12%</span>
                   </div>
                 </div>
 
-                <!-- Bagian Bawah: Chart Wrapper -->
-                <div id="chart-dbx" class="mt-auto h-[55px] w-[110%] relative -left-[5%] pointer-events-none" aria-hidden="true"></div>
+                <div class="absolute bottom-0 left-0 w-full h-[65px] z-0 pointer-events-none">
+                  <div id="chart-dbx" class="w-[102%] h-full relative -left-[1%]" aria-hidden="true"></div>
+                </div>
               </button>
             </div>
           </div>
