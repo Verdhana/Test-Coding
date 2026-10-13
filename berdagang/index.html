@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth antialiased" data-theme="light">
+  <head>
+    <!-- =======================================================================
+         1. META & SEO OPTIMIZATION (VERDHANA SEKURITAS ENTERPRISE STANDARD)
+         ======================================================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+    <meta name="description" content="Berdagang & Portofolio - Verdhana Sekuritas Enterprise Trading Platform" />
+    <meta name="keywords" content="Verdhana Sekuritas, Berdagang, Portofolio Saham, INCO, OTC, Investasi Saham Indonesia" />
+    <meta name="author" content="Verdhana Sekuritas Architecture Team" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>Berdagang & Portofolio | Verdhana Sekuritas</title>
+
+    <!-- =======================================================================
+         2. EXTERNAL LIBRARIES & FONTS (SYNCED WITH BERANDA & PROFIL SAVE POINT)
+         ======================================================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- =======================================================================
+         3. TAILWIND CSS CONFIGURATION (EXACT MATCH VERDHANA COLORS)
+         ======================================================================= -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                red: "#D32F2F" /* Client Exact Red */,
+                darkred: "#B71C1C" /* Client Exact Dark Red */,
+                silver: "#E0E0E0" /* Client Exact Silver */,
+                lightsilver: "#F8FAFC" /* Client Exact Light Silver */,
+                darksilver: "#94A3B8" /* Client Exact Dark Silver */,
+              },
+              positive: "#10B981" /* Bullish / Rise Green */,
+              negative: "#EF4444" /* Bearish / Fall Red */,
+              warning: "#F59E0B" /* Alert / Pending Amber */,
+            },
+            boxShadow: {
+              "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
+              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-lg": "0 20px 45px -12px rgba(211, 47, 47, 0.14), 0 8px 18px -4px rgba(0, 0, 0, 0.05)",
+              "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
+              "premium-inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
+              "premium-btn": "0 8px 20px -4px rgba(211, 47, 47, 0.35), 0 2px 6px -1px rgba(211, 47, 47, 0.2)",
+            },
+            keyframes: {
+              slideUpFade: {
+                "0%": { opacity: "0", transform: "translateY(15px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              pulseSubtle: {
+                "0%, 100%": { opacity: "1", transform: "scale(1)" },
+                "50%": { opacity: "0.85", transform: "scale(1.05)" },
+              },
+              shimmerMove: {
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(100%)" },
+              },
+              modalPop: {
+                "0%": { opacity: "0", transform: "scale(0.94) translateY(10px)" },
+                "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
+              },
+            },
+            animation: {
+              slideUpFade: "slideUpFade 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+              pulseSubtle: "pulseSubtle 2.5s ease-in-out infinite",
+              shimmerMove: "shimmerMove 1.6s infinite",
+              modalPop: "modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- =======================================================================
+         4. ENTERPRISE CSS ARCHITECTURE (VARIABLES, POLISHING & RESPONSIVENESS)
+         ======================================================================= -->
+    <style>
+      /* --- 4.1 CSS VARIABLES & THEME TOKENS (VERDHANA DESIGN SYSTEM) --- */
+      :root {
+        --ex-primary-color: #d32f2f;
+        --ex-primary-hover: #b71c1c;
+        --ex-primary-soft: rgba(211, 47, 47, 0.08);
+        --ex-primary-border: rgba(211, 47, 47, 0.22);
+        --ex-rise-color: #10b981;
+        --ex-rise-soft: rgba(16, 185, 129, 0.1);
+        --ex-fall-color: #ef4444;
+        --ex-fall-soft: rgba(239, 68, 68, 0.1);
+
+        --bg-outer: #f1f5f9;
+        --bg-app: #ffffff;
+        --bg-surface: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-glass: rgba(255, 255, 255, 0.85);
+        --border-glass: rgba(226, 232, 240, 0.6);
+        --border-card: rgba(224, 224, 224, 0.65);
+        --border-dashed: #cbd5e1;
+
+        --text-main: #1f2937;
+        --text-secondary: #475569;
+        --text-muted: #64748b;
+
+        --ease-premium: cubic-bezier(0.25, 0.1, 0.25, 1);
+        --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      html.dark {
+        --ex-primary-color: #d32f2f;
+        --ex-primary-hover: #ef4444;
+        --ex-primary-soft: rgba(211, 47, 47, 0.16);
+        --ex-primary-border: rgba(239, 68, 68, 0.3);
+        --ex-rise-color: #10b981;
+        --ex-rise-soft: rgba(16, 185, 129, 0.15);
+        --ex-fall-color: #ef4444;
+        --ex-fall-soft: rgba(239, 68, 68, 0.15);
+
+        --bg-outer: #020617;
+        --bg-app: #0f172a;
+        --bg-surface: #1e293b;
+        --bg-card: #1e293b;
+        --bg-glass: rgba(15, 23, 42, 0.85);
+        --border-glass: rgba(30, 41, 59, 0.5);
+        --border-card: rgba(51, 65, 85, 0.7);
+        --border-dashed: #334155;
+
+        --text-main: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+      }
+
+      /* --- 4.2 BASE RESETS & NUMERIC PRECISION --- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-outer);
+        color: var(--text-main);
+        transition:
+          background-color 0.4s var(--ease-premium),
+          color 0.4s var(--ease-premium);
+        overscroll-behavior-y: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Tabular numbers for financial alignment */
+      .fw-num {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+      }
+
+      .rise {
+        color: var(--ex-rise-color);
+      }
+
+      .fall {
+        color: var(--ex-fall-color);
+      }
+
+      /* --- 4.3 ACCESSIBILITY (A11Y) FOCUS RING --- */
+      *:focus {
+        outline: none;
+      }
+      .focus-visible-ring:focus-visible {
+        outline: 2px solid var(--ex-primary-color);
+        outline-offset: 2px;
+        border-radius: 8px;
+      }
+
+      /* --- 4.4 SAFE AREA INSETS & SCROLLBAR UTILITIES --- */
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 24px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* --- 4.5 GLASSMORPHISM & HOVER-LIFT DEPTH --- */
+      .glass-effect {
+        background-color: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-glass);
+      }
+
+      .hover-lift {
+        transition:
+          transform 0.3s var(--ease-spring),
+          box-shadow 0.3s var(--ease-premium),
+          border-color 0.3s var(--ease-premium);
+      }
+      .hover-lift:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--tw-shadow-premium-md);
+      }
+      .hover-lift:active {
+        transform: translateY(1px);
+        box-shadow: var(--tw-shadow-premium-sm);
+      }
+
+      /* --- 4.6 MATERIAL RIPPLE EFFECT --- */
+      .ripple-surface {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+      }
+      .ripple-circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(211, 47, 47, 0.14);
+        transform: scale(0);
+        animation: ripple-anim 0.6s var(--ease-premium) forwards;
+        pointer-events: none;
+      }
+      .ripple-light .ripple-circle {
+        background-color: rgba(255, 255, 255, 0.28);
+      }
+      @keyframes ripple-anim {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      /* --- 4.7 TRADE PAGE SPECIFIC COMPONENTS (PROTOTYPE CLONE & POLISH) --- */
+      /* 1. Top "Aset Saya" Bar (hold / van-tabs) */
+      .hold-tab-bar {
+        background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-card) 100%);
+        border: 1px solid var(--border-card);
+        border-radius: 1rem;
+        padding: 0.25rem;
+        box-shadow: var(--tw-shadow-premium-sm);
+        transition: all 0.3s var(--ease-premium);
+      }
+
+      .hold-tab-active {
+        background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+        color: #ffffff;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 14px -2px rgba(211, 47, 47, 0.35);
+      }
+
+      /* 2. Main Asset Summary Card (data-wrapper) */
+      .data-wrapper-card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-card);
+        border-radius: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s var(--ease-premium);
+      }
+      .data-wrapper-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #d32f2f, #ef4444, #b71c1c);
+        opacity: 0.9;
+      }
+
+      /* 3. Two-Column Status Grid (beijin / grid-container) */
+      .beijin-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .beijin-card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-card);
+        border-radius: 1.25rem;
+        padding: 1rem 1.125rem;
+        transition: all 0.3s var(--ease-premium);
+      }
+      .beijin-card:hover {
+        border-color: var(--ex-primary-border);
+      }
+
+      /* 4. Interactive Sub-Tabs (Portofolio & Histori) */
+      .trade-tabs-nav {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        border-bottom: 1px solid var(--border-card);
+      }
+      .trade-tab-btn {
+        position: relative;
+        padding: 0.875rem 0.5rem;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-align: center;
+        transition: color 0.3s var(--ease-premium);
+        cursor: pointer;
+      }
+      .trade-tab-btn[aria-selected="true"] {
+        color: var(--ex-primary-color);
+        font-weight: 800;
+      }
+      html.dark .trade-tab-btn[aria-selected="true"] {
+        color: #ffffff;
+      }
+      .trade-tab-indicator {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        display: flex;
+        justify-content: center;
+        transition: transform 0.35s var(--ease-spring);
+        pointer-events: none;
+      }
+      .trade-tab-indicator-bar {
+        width: 42px;
+        height: 100%;
+        background-color: var(--ex-primary-color);
+        border-radius: 9999px;
+        box-shadow: 0 2px 8px rgba(211, 47, 47, 0.45);
+      }
+
+      /* 5. Stock Position Order Box (myStockList -> order-box) */
+      .order-box-card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-card);
+        border-radius: 1.5rem;
+        padding: 1.25rem;
+        transition: all 0.3s var(--ease-premium);
+      }
+      .order-box-card:hover {
+        border-color: var(--ex-primary-border);
+      }
+
+      /* Pill Badges (ID, OTC, Pembelian) */
+      .stock-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.15rem 0.55rem;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.2;
+        border-radius: 0.375rem;
+        letter-spacing: 0.02em;
+        transition: all 0.2s var(--ease-premium);
+      }
+      .stock-badge-neutral {
+        background-color: var(--bg-surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-card);
+      }
+      .stock-badge-otc {
+        background-color: rgba(211, 47, 47, 0.08);
+        color: var(--ex-primary-color);
+        border: 1px solid var(--ex-primary-border);
+      }
+      html.dark .stock-badge-otc {
+        background-color: rgba(211, 47, 47, 0.18);
+        color: #fca5a5;
+      }
+      .stock-badge-buy {
+        background-color: var(--ex-rise-soft);
+        color: var(--ex-rise-color);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+      }
+
+      /* Precision Horizontal Dashed Separator (.line) */
+      .order-dashed-separator {
+        width: 100%;
+        height: 1px;
+        margin: 0.875rem 0;
+        border-bottom: 1px dashed var(--border-dashed);
+      }
+
+      /* Primary Full-Width Action Button ("Menutup posisi") */
+      .btn-close-position {
+        background-color: var(--ex-primary-color);
+        color: #ffffff;
+        width: 100%;
+        padding: 0.875rem 1.25rem;
+        border-radius: 0.875rem;
+        font-size: 0.8125rem;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        text-align: center;
+        box-shadow: var(--tw-shadow-premium-btn);
+        transition:
+          background-color 0.25s var(--ease-premium),
+          transform 0.25s var(--ease-spring),
+          box-shadow 0.25s var(--ease-premium);
+      }
+      .btn-close-position:hover {
+        background-color: var(--ex-primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px -4px rgba(211, 47, 47, 0.45);
+      }
+      .btn-close-position:active {
+        transform: translateY(1px);
+      }
+
+      /* --- 4.8 SKELETON SHIMMER PLACEHOLDER --- */
+      .skeleton-box {
+        position: relative;
+        overflow: hidden;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-card);
+      }
+      .skeleton-box::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(148, 163, 184, 0.12) 50%, rgba(255, 255, 255, 0) 100%);
+        animation: shimmerMove 1.6s infinite;
+      }
+
+      /* --- 4.9 CROSS-DEVICE MEDIA QUERIES (320px TO 4K DESKTOP) --- */
+      @media screen and (max-width: 359px) {
+        .asset-headline-num {
+          font-size: 1.45rem !important;
+        }
+        .beijin-grid {
+          gap: 8px;
+        }
+        .beijin-card {
+          padding: 0.75rem;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        .app-container {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          height: calc(100vh - 4rem);
+          border-radius: 2.5rem;
+          overflow: hidden;
+          box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            0 0 0 10px rgba(15, 23, 42, 0.05),
+            inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+          border: 1px solid var(--border-glass);
+        }
+        .bottom-nav-glass {
+          position: absolute !important;
+          border-bottom-left-radius: 2.5rem;
+          border-bottom-right-radius: 2.5rem;
+        }
+        body {
+          overflow-y: hidden;
+        }
+        #main-viewport {
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+
+      @media screen and (min-width: 1024px) {
+        body {
+          background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+          background-size: 32px 32px;
+        }
+        html.dark body {
+          background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+      }
+    </style>
+  </head>
+  <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-500 ease-in-out">
+    <!-- =======================================================================
+         5. MAIN APPLICATION CONTAINER (FRAME)
+         ======================================================================= -->
+    <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-500 ease-in-out">
+      <!-- =====================================================================
+           6. GLOBAL HEADER (100% IDENTICAL TO BERANDA & PROFIL SAVE POINT)
+           ===================================================================== -->
+      <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-4 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
+        <!-- Logo Asli Verdhana -->
+        <a href="Verdhana_Sek V.2_3.html" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 cursor-pointer focus-visible-ring p-1 -ml-1 group">
+          <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm group-hover:scale-105 transition-transform duration-300">V</span>
+          <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
+        </a>
+
+        <!-- Search Bar ("Cari saham...") -->
+        <div class="flex-1 mx-3" role="search">
+          <label for="global-search" class="sr-only">Cari saham</label>
+          <div
+            class="bg-brand-lightsilver dark:bg-slate-800 rounded-full flex items-center px-3.5 py-2 border border-transparent focus-within:border-brand-red/30 focus-within:ring-2 focus-within:ring-brand-red/10 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all duration-300 shadow-premium-inner"
+          >
+            <i class="fa-solid fa-search text-brand-darksilver text-xs" aria-hidden="true"></i>
+            <input
+              id="global-search"
+              type="text"
+              data-i18n-placeholder="search_placeholder"
+              placeholder="Cari saham..."
+              class="bg-transparent border-none outline-none text-xs font-semibold w-full ml-2.5 text-gray-800 dark:text-white placeholder-brand-darksilver focus-visible-ring"
+              autocomplete="off"
+            />
+            <button id="btn-clear-search" type="button" onclick="window.VerdhanaTradeApp.filter.clearSearch()" aria-label="Hapus pencarian" class="hidden text-gray-400 hover:text-brand-red transition-colors ml-1 text-xs">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Controls: Lang, Theme, Bell -->
+        <div class="flex items-center gap-2.5 shrink-0">
+          <!-- Select Lang -->
+          <div class="relative group">
+            <label for="lang-switcher" class="sr-only">Pilih Bahasa</label>
+            <select
+              id="lang-switcher"
+              onchange="window.VerdhanaTradeApp.i18n.changeLang(this.value)"
+              class="bg-transparent text-[11px] font-bold text-gray-600 dark:text-gray-300 outline-none cursor-pointer appearance-none uppercase transition-colors hover:text-brand-red focus-visible-ring p-1"
+            >
+              <option value="id" class="dark:bg-slate-800">ID</option>
+              <option value="en" class="dark:bg-slate-800">EN</option>
+              <option value="zh" class="dark:bg-slate-800">ZH</option>
+            </select>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button
+            onclick="window.VerdhanaTradeApp.theme.toggle()"
+            aria-label="Ganti Tema"
+            class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            <svg id="icon-moon" class="w-[16px] h-[16px] block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="icon-sun" class="w-[16px] h-[16px] hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.32a1 1 0 011.415 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-1.32 4.22a1 1 0 010 1.415l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.415 0zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-4.22-1.32a1 1 0 01-1.415 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm1.32-4.22a1 1 0 010-1.415l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.415 0zM10 6a4 4 0 100 8 4 4 0 000-8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Notification -->
+          <button
+            onclick="window.VerdhanaTradeApp.ui.showToast('Semua posisi portofolio tersinkronisasi real-time.')"
+            aria-label="Notifikasi"
+            class="relative focus-visible-ring text-gray-500 dark:text-gray-400 p-1.5 hover:text-brand-red dark:hover:text-brand-red transition-colors shrink-0 active:scale-90 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            <i class="fa-solid fa-bell text-lg" aria-hidden="true"></i>
+            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-red rounded-full border-2 border-white dark:border-slate-900 animate-pulseSubtle"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- =====================================================================
+           7. MAIN VIEWPORT (SCROLLABLE CONTENT - pb-[110px] SAFE AREA)
+           ===================================================================== -->
+      <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[110px] no-scrollbar relative">
+        <!-- ===================================================================
+             7.0 SKELETON SHIMMER OVERLAY (INITIAL SMOOTH LOADING STATE)
+             =================================================================== -->
+        <div id="trade-skeleton" aria-hidden="true" class="px-4 pt-4 pb-6 flex flex-col gap-3.5 transition-opacity duration-300">
+          <div class="h-11 w-full rounded-2xl skeleton-box"></div>
+          <div class="h-44 w-full rounded-3xl skeleton-box"></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="h-20 rounded-2xl skeleton-box"></div>
+            <div class="h-20 rounded-2xl skeleton-box"></div>
+          </div>
+          <div class="h-10 w-full rounded-xl skeleton-box mt-2"></div>
+          <div class="h-72 w-full rounded-3xl skeleton-box"></div>
+        </div>
+
+        <!-- ===================================================================
+             7.1 REAL TRADE & PORTFOLIO CONTENT (tarde -> shobuliao -> hold)
+             =================================================================== -->
+        <div id="trade-real-content" class="hidden">
+          <!-- SEKSI 1, 2 & 3: BAR ASET SAYA, KARTU UTAMA & GRID 2 KOLOM -->
+          <section aria-label="Ringkasan Aset dan Status Dana" class="px-4 pt-4 pb-2 opacity-0 animate-slideUpFade" style="animation-delay: 50ms">
+            <!-- 1. Bar Judul Seksi Atas (hold / van-tabs) -->
+            <div role="tablist" aria-label="Navigasi Aset Saya" class="hold-tab-bar mb-3.5">
+              <div id="van-tabs-20-0" role="tab" aria-selected="true" tabindex="0" class="hold-tab-active ripple-surface ripple-light py-2.5 px-4 flex items-center justify-center cursor-pointer select-none transition-all duration-300">
+                <span data-i18n="asset_tab_title" class="text-[13px] font-extrabold tracking-wide text-white"> Aset Saya </span>
+              </div>
+            </div>
+
+            <!-- 2. Kartu Utama Ringkasan Aset (data-wrapper) -->
+            <div class="data-wrapper-card p-5 shadow-premium-md hover-lift mb-3">
+              <!-- Decorative Ambient Glow -->
+              <div class="absolute -right-10 -top-10 w-36 h-36 bg-brand-red/5 dark:bg-brand-red/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+
+              <!-- Baris Total Aset Utama + Tombol Mata Interaktif -->
+              <div class="data-item flex items-center justify-between gap-2 mb-5 relative z-10">
+                <div class="flex items-baseline flex-wrap gap-1.5">
+                  <span
+                    id="val-main-asset"
+                    class="asset-headline-num value fw-num text-[26px] sm:text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none maskable-metric"
+                    data-raw="350.967.518,40"
+                    data-mask="••••••••"
+                  >
+                    350.967.518,40
+                  </span>
+                  <span class="accounttype text-[15px] font-extrabold text-brand-red dark:text-red-400 tracking-tight"> Rp </span>
+                </div>
+
+                <!-- Interactive Eye Button (SVG) -->
+                <button
+                  id="btn-eye-toggle"
+                  type="button"
+                  onclick="window.VerdhanaTradeApp.ui.toggleMask()"
+                  aria-label="Sembunyikan atau tampilkan nominal aset"
+                  aria-pressed="false"
+                  class="ripple-surface focus-visible-ring w-9 h-9 rounded-xl bg-brand-lightsilver dark:bg-slate-700/80 border border-brand-silver/60 dark:border-slate-600 text-gray-600 dark:text-gray-300 hover:text-brand-red dark:hover:text-brand-red flex items-center justify-center transition-all duration-300 active:scale-90 shrink-0 shadow-premium-sm"
+                >
+                  <!-- Eye Open SVG (Default Active) -->
+                  <svg id="eye-icon-open" class="w-[18px] h-[18px] block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  <!-- Eye Closed SVG (Hidden State) -->
+                  <svg id="eye-icon-closed" class="w-[18px] h-[18px] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Baris Distribusi (fenbu): P&L (Kiri) & Equity (Kanan) -->
+              <div class="fenbu flex items-center justify-between pt-4 border-t border-brand-silver/50 dark:border-slate-700/80 relative z-10">
+                <!-- Kiri: P&L -->
+                <div class="data-item flex flex-col">
+                  <span data-i18n="label_pnl" class="label text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1"> P&amp;L </span>
+                  <span id="val-pnl" class="label fw-num text-[14px] font-extrabold text-gray-900 dark:text-white tracking-tight maskable-metric" data-raw="1.928.364.312,00" data-mask="••••••••"> 1.928.364.312,00 </span>
+                </div>
+
+                <!-- Kanan: Equity (Rata Kanan) -->
+                <div class="data-item flex flex-col text-right items-end">
+                  <span data-i18n="label_equity" class="label text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1"> Equity </span>
+                  <span id="val-equity" class="label right fw-num text-[14px] font-extrabold text-gray-900 dark:text-white tracking-tight maskable-metric" data-raw="29.312.493,60" data-mask="••••••••"> 29.312.493,60 </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Grid Dua Kolom Status Dana (beijin / grid-container) -->
+            <div class="beijin">
+              <div class="grid-container beijin-grid">
+                <!-- Kartu Kiri: Dana yang digunakan -->
+                <div class="grid-item beijin-card hover-lift shadow-premium-sm">
+                  <div class="fenbu flex flex-col justify-between h-full">
+                    <span data-i18n="label_used_funds" class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1.5"> Dana yang digunakan </span>
+                    <span id="val-used-funds" class="value fw-num text-[15px] font-black text-gray-900 dark:text-white tracking-tight maskable-metric" data-raw="355.524.300,00" data-mask="••••••••"> 355.524.300,00 </span>
+                  </div>
+                </div>
+
+                <!-- Kartu Kanan: Dana yang dibekukan -->
+                <div class="grid-item beijin-card hover-lift shadow-premium-sm">
+                  <div class="fenbu flex flex-col justify-between h-full">
+                    <span data-i18n="label_frozen_funds" class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1.5"> Dana yang dibekukan </span>
+                    <span id="val-frozen-funds" class="value fw-num text-[15px] font-black text-gray-900 dark:text-white tracking-tight maskable-metric" data-raw="0,00" data-mask="••••"> 0,00 </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- =================================================================
+               7.2 SUB-TAB NAVIGASI TRANSAKSI (tabs-box: Portofolio & Histori)
+               ================================================================= -->
+          <section aria-label="Tab Transaksi Portofolio dan Histori" class="tabs-box px-4 mt-3 opacity-0 animate-slideUpFade" style="animation-delay: 140ms">
+            <div role="tablist" aria-orientation="horizontal" class="trade-tabs-nav">
+              <!-- Tab 1: Portofolio (Default Active) -->
+              <button
+                id="tab-btn-portfolio"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="panel-portfolio"
+                tabindex="0"
+                onclick="window.VerdhanaTradeApp.tabs.switchTab('portfolio')"
+                class="trade-tab-btn ripple-surface focus-visible-ring"
+              >
+                <span data-i18n="tab_portfolio" class="tab-item">Portofolio</span>
+              </button>
+
+              <!-- Tab 2: Histori -->
+              <button
+                id="tab-btn-history"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="panel-history"
+                tabindex="-1"
+                onclick="window.VerdhanaTradeApp.tabs.switchTab('history')"
+                class="trade-tab-btn ripple-surface focus-visible-ring"
+              >
+                <span data-i18n="tab_history" class="tab-item">Histori</span>
+              </button>
+
+              <!-- Animated Bottom Red Line Indicator -->
+              <div id="trade-tab-line" class="trade-tab-indicator" style="transform: translateX(0%)" aria-hidden="true">
+                <div class="trade-tab-indicator-bar"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- =================================================================
+               7.3 KARTU POSISI SAHAM / ORDER BOX (myStockList -> order-box)
+               ================================================================= -->
+          <section aria-label="Daftar Posisi Saham" class="myStockList px-4 pt-4 pb-4 opacity-0 animate-slideUpFade" style="animation-delay: 220ms">
+            <!-- PANEL 1: PORTOFOLIO AKTIF -->
+            <div id="panel-portfolio" role="tabpanel" aria-labelledby="tab-btn-portfolio" class="van-list flex flex-col gap-4">
+              <!-- KARTU UTAMA: PT Vale Indonesia Tbk (INCO) -->
+              <article id="order-card-inco" data-symbol="INCO" data-name="PT Vale Indonesia Tbk" class="order-box order-box-card shadow-premium-md hover-lift">
+                <div class="page-border">
+                  <!-- Header Kartu: Nama Emiten (Kiri) & Harga Bullish (Kanan) -->
+                  <div class="Micorfhg flex items-start justify-between gap-2 mb-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <h2 class="stockName text-[15px] font-extrabold text-gray-900 dark:text-white tracking-tight truncate">PT Vale Indonesia Tbk</h2>
+                    </div>
+                    <div id="inco-live-price" class="fw-num rise text-[16px] font-black text-positive tracking-tight shrink-0">4.110,00 Rp</div>
+                  </div>
+
+                  <!-- Baris Kode & 3 Pill Badges: INCO | ID | OTC | Pembelian -->
+                  <div class="flex items-center flex-wrap gap-1.5 mb-1">
+                    <span class="text-xs font-extrabold text-gray-800 dark:text-gray-200 tracking-wide mr-1"> INCO </span>
+                    <span class="type stock-badge stock-badge-neutral">ID</span>
+                    <span class="type stock-badge stock-badge-otc">OTC</span>
+                    <span data-i18n="badge_buy" class="type stock-badge stock-badge-buy"> Pembelian </span>
+                  </div>
+
+                  <!-- Garis Pemisah Putus-Putus Halus (line) -->
+                  <div class="line order-dashed-separator" aria-hidden="true"></div>
+
+                  <!-- Rincian Data Posisi (5 Baris Key-Value Rata Kiri-Kanan) -->
+                  <div class="flex flex-col gap-2.5 text-xs">
+                    <!-- Baris 1: Waktu pembelian & Persentase (+37.82 %) -->
+                    <div class="item flex items-center justify-between gap-2">
+                      <span class="text-gray-500 dark:text-gray-400 font-medium">
+                        <span data-i18n="row_buy_time">Waktu pembelian</span>
+                        <span class="fw-num ml-0.5">10.01.2026/13:13:00</span>
+                      </span>
+                      <span id="inco-profit-pct" class="fw-num rise font-extrabold text-positive bg-positive/10 px-2 py-0.5 rounded-md"> 37.82 % </span>
+                    </div>
+
+                    <!-- Baris 2: Jumlah posisi (26000) -->
+                    <div class="item flex items-center justify-between gap-2">
+                      <span data-i18n="row_position_qty" class="text-gray-500 dark:text-gray-400 font-medium"> Jumlah posisi </span>
+                      <span class="fw-num font-bold text-gray-900 dark:text-white"> 26000 </span>
+                    </div>
+
+                    <!-- Baris 3: Biaya Pesanan (2.982,00 Rp) -->
+                    <div class="item flex items-center justify-between gap-2">
+                      <span data-i18n="row_order_cost" class="text-gray-500 dark:text-gray-400 font-medium"> Biaya Pesanan </span>
+                      <span class="fw-num font-bold text-gray-900 dark:text-white"> 2.982,00 Rp </span>
+                    </div>
+
+                    <!-- Baris 4: Keuntungan Saat Ini (29.312.493,60 Rp) -->
+                    <div class="item flex items-center justify-between gap-2">
+                      <span data-i18n="row_current_profit" class="text-gray-500 dark:text-gray-400 font-medium"> Keuntungan Saat Ini </span>
+                      <span id="inco-current-profit" class="fw-num font-extrabold text-gray-900 dark:text-white"> 29.312.493,60 Rp </span>
+                    </div>
+
+                    <!-- Baris 5: Biaya Penanganan (Kapitalisasi Diperbaiki: 15.506,40 Rp) -->
+                    <div class="item flex items-center justify-between gap-2">
+                      <span data-i18n="row_handling_fee" class="text-gray-500 dark:text-gray-400 font-medium"> Biaya Penanganan </span>
+                      <span class="fw-num font-bold text-gray-900 dark:text-white"> 15.506,40 Rp </span>
+                    </div>
+                  </div>
+
+                  <!-- Tombol Aksi Utama Full-Width ("Menutup posisi") -->
+                  <div class="flex-btn mt-5">
+                    <button
+                      type="button"
+                      onclick="window.VerdhanaTradeApp.modal.openClosePositionModal('INCO')"
+                      style="background-color: var(--ex-primary-color)"
+                      class="btn1 btn btn-close-position ripple-surface ripple-light focus-visible-ring cursor-pointer"
+                    >
+                      <span data-i18n="btn_close_position">Menutup posisi</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Empty Filter State (Muncul bila pencarian tidak cocok) -->
+              <div id="portfolio-search-empty" class="hidden py-10 text-center text-xs text-gray-400 dark:text-gray-500 font-medium">Tidak ditemukan emiten yang cocok dengan kata kunci pencarian.</div>
+
+              <!-- Footer List: Tidak ada lagi data yang tersedia! -->
+              <div data-i18n="list_finished_text" class="van-list__finished-text text-center text-xs font-semibold text-gray-400 dark:text-gray-500 py-3 tracking-wide select-none">Tidak ada lagi data yang tersedia!</div>
+              <div class="van-list__placeholder h-2"></div>
+            </div>
+
+            <!-- PANEL 2: HISTORI TRANSAKSI (Interaktif saat Tab Histori Diklik) -->
+            <div id="panel-history" role="tabpanel" aria-labelledby="tab-btn-history" class="van-list hidden flex-col gap-4">
+              <!-- Wadah dinamis jika posisi ditutup pada sesi berjalan -->
+              <div id="history-dynamic-list" class="flex flex-col gap-3.5"></div>
+
+              <!-- Footer List Histori -->
+              <div data-i18n="list_finished_text" class="van-list__finished-text text-center text-xs font-semibold text-gray-400 dark:text-gray-500 py-6 tracking-wide select-none">Tidak ada lagi data yang tersedia!</div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- END MAIN VIEWPORT -->
+      <!-- =====================================================================
+           8. BOTTOM NAVIGATION BAR (FIXED, 100% PRECISE VISUAL CLONE)
+           ===================================================================== -->
+      <nav
+        aria-label="Navigasi Utama"
+        class="glass-effect bottom-nav-fixed pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transition-colors duration-500"
+      >
+        <!-- Menu 1: Beranda (Abu-abu) -->
+        <a
+          href="https://verdhanaprototype-11vy.vercel.app/"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl"
+        >
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.99 9a.75.75 0 1 1-1.06 1.061l-1.21-1.22v7.568a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0-.75.75v4.5a.75.75 0 0 1-.75.75H5.25a.75.75 0 0 1-.75-.75v-7.568l-1.21 1.22a.75.75 0 1 1-1.06-1.06l8.99-9Z"
+              />
+            </svg>
+          </div>
+          <span data-i18n="nav_home" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Beranda</span>
+        </a>
+
+        <!-- Menu 2: Pasar (Abu-abu) -->
+        <a
+          href="#market"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl"
+        >
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm4.96 6.84l-4.56 4.56v5.85a8.25 8.25 0 0 1-8.65-8.65h5.85l4.56-4.56a8.25 8.25 0 0 1 2.8 2.8Z" />
+              <path d="M13.5 3.16v6.59l4.66-4.66a8.25 8.25 0 0 0-4.66-1.93Z" />
+            </svg>
+          </div>
+          <span data-i18n="nav_market" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Pasar</span>
+        </a>
+
+        <!-- Menu 3: Berdagang (AKTIF - MERAH VERDHANA) -->
+        <a href="https://verdhanaprototype-11vy.vercel.app/berdagang" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl">
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M535 41c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l64 64c4.5 4.5 7 10.6 7 17s-2.5 12.5-7 17l-64 64c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l23-23L384 96c-17.7 0-32-14.3-32-32s14.3-32 32-32l174.1 0L535 41zM105 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-64-64c-4.5-4.5-7-10.6-7-17s2.5-12.5 7-17l64-64c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-23 23L256 416c17.7 0 32 14.3 32 32s-14.3 32-32 32l-174.1 0L105 471zM224 256c0-35.3 28.7-64 64-64l64 0c35.3 0 64 28.7 64 64s-28.7 64-64 64l-64 0c-35.3 0-64-28.7-64-64zM160 304c0 10.1 2.1 19.6 5.8 28.2L96 352c-17.7 0-32-14.3-32-32l0-128c0-17.7 14.3-32 32-32l448 0c17.7 0 32 14.3 32 32l0 128c0 17.7-14.3 32-32 32l-69.8-19.8c3.7-8.6 5.8-18.1 5.8-28.2l0-64c0-53-43-96-96-96l-64 0c-53 0-96 43-96 96l0 64z"
+              />
+            </svg>
+          </div>
+          <span data-i18n="nav_trade" class="text-[11px] font-bold text-center w-full">Berdagang</span>
+        </a>
+
+        <!-- Menu 4: Favorit (Abu-abu) -->
+        <a
+          href="#favorites"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl"
+        >
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.24l2.85 5.77 6.37.93-4.61 4.49 1.09 6.34L12 16.76l-5.7 3.01 1.09-6.34-4.61-4.49 6.37-.93L12 2.24z" />
+            </svg>
+          </div>
+          <span data-i18n="nav_fav" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Favorit</span>
+        </a>
+
+        <!-- Menu 5: Profil (Abu-abu) -->
+        <a
+          href="https://verdhanaprototype-11vy.vercel.app/profile"
+          class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl"
+        >
+          <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
+            <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" />
+            </svg>
+          </div>
+          <span data-i18n="nav_profile" class="text-[11px] font-bold text-center w-full group-hover:font-semibold">Profil</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- =======================================================================
+         9. MODAL POPUP & TOAST ALERTS OVERLAY (Z-INDEX: 10000)
+         ======================================================================= -->
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-[10000] flex flex-col gap-2 pointer-events-none w-max max-w-[90%]"></div>
+
+    <!-- Confirm Close Position Modal -->
+    <div id="modal-close-position" class="fixed inset-0 z-[10000] hidden items-center justify-center p-4">
+      <!-- Modal Backdrop (Blur effect) -->
+      <div class="absolute inset-0 bg-gray-900/60 dark:bg-black/70 backdrop-blur-sm transition-opacity" onclick="window.VerdhanaTradeApp.modal.closeClosePositionModal()"></div>
+
+      <!-- Modal Content Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] w-full max-w-[320px] p-6 relative z-10 shadow-premium-lg border border-brand-silver/50 dark:border-slate-700 animate-modalPop">
+        <h3 data-i18n="modal_close_title" class="text-xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Tutup Posisi?</h3>
+        <p class="text-[13px] text-gray-500 dark:text-gray-400 mb-6 font-medium leading-relaxed">
+          <span data-i18n="modal_close_desc_1">Apakah Anda yakin ingin menutup posisi untuk emiten</span>
+          <strong id="modal-symbol-name" class="text-gray-900 dark:text-white font-extrabold mx-1">...</strong>?
+          <span data-i18n="modal_close_desc_2">Tindakan ini akan mengeksekusi penjualan pada harga pasar saat ini.</span>
+        </p>
+
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            onclick="window.VerdhanaTradeApp.modal.closeClosePositionModal()"
+            class="flex-1 py-3 rounded-[0.875rem] font-bold text-gray-700 dark:text-gray-300 bg-brand-lightsilver dark:bg-slate-700/80 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors focus-visible-ring"
+          >
+            <span data-i18n="btn_cancel">Batal</span>
+          </button>
+          <button
+            type="button"
+            onclick="window.VerdhanaTradeApp.modal.confirmClosePosition()"
+            class="flex-1 py-3 rounded-[0.875rem] font-bold text-white bg-brand-red hover:bg-brand-darkred shadow-premium-btn transition-colors focus-visible-ring"
+          >
+            <span data-i18n="btn_confirm">Konfirmasi</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         10. ENTERPRISE JAVASCRIPT ENGINE (LOGIC & STATE MANAGEMENT)
+         ======================================================================= -->
+    <script>
+      "use strict";
+
+      class I18nManager {
+        constructor() {
+          this.dict = {
+            id: {
+              search_placeholder: "Cari saham...",
+              asset_tab_title: "Aset Saya",
+              label_pnl: "P&L",
+              label_equity: "Equity",
+              label_used_funds: "Dana yang digunakan",
+              label_frozen_funds: "Dana yang dibekukan",
+              tab_portfolio: "Portofolio",
+              tab_history: "Histori",
+              badge_buy: "Pembelian",
+              row_buy_time: "Waktu pembelian",
+              row_position_qty: "Jumlah posisi",
+              row_order_cost: "Biaya Pesanan",
+              row_current_profit: "Keuntungan Saat Ini",
+              row_handling_fee: "Biaya Penanganan",
+              btn_close_position: "Menutup posisi",
+              list_finished_text: "Tidak ada lagi data yang tersedia!",
+              nav_home: "Beranda",
+              nav_market: "Pasar",
+              nav_trade: "Berdagang",
+              nav_fav: "Favorit",
+              nav_profile: "Profil",
+              modal_close_title: "Tutup Posisi?",
+              modal_close_desc_1: "Apakah Anda yakin ingin menutup posisi untuk emiten",
+              modal_close_desc_2: "Tindakan ini akan mengeksekusi penjualan pada harga pasar saat ini.",
+              btn_cancel: "Batal",
+              btn_confirm: "Konfirmasi",
+              toast_success_close: "Posisi berhasil ditutup.",
+            },
+            en: {
+              search_placeholder: "Search stocks...",
+              asset_tab_title: "My Assets",
+              label_pnl: "P&L",
+              label_equity: "Equity",
+              label_used_funds: "Used funds",
+              label_frozen_funds: "Frozen funds",
+              tab_portfolio: "Portfolio",
+              tab_history: "History",
+              badge_buy: "Buy",
+              row_buy_time: "Time of purchase",
+              row_position_qty: "Position qty",
+              row_order_cost: "Order Cost",
+              row_current_profit: "Current Profit",
+              row_handling_fee: "Handling Fee",
+              btn_close_position: "Close position",
+              list_finished_text: "No more data available!",
+              nav_home: "Home",
+              nav_market: "Market",
+              nav_trade: "Trade",
+              nav_fav: "Favorites",
+              nav_profile: "Profile",
+              modal_close_title: "Close Position?",
+              modal_close_desc_1: "Are you sure you want to close the position for",
+              modal_close_desc_2: "This will execute a market sell order immediately.",
+              btn_cancel: "Cancel",
+              btn_confirm: "Confirm",
+              toast_success_close: "Position closed successfully.",
+            },
+            zh: {
+              search_placeholder: "搜索股票...",
+              asset_tab_title: "我的资产",
+              label_pnl: "盈亏",
+              label_equity: "净值",
+              label_used_funds: "已用资金",
+              label_frozen_funds: "冻结资金",
+              tab_portfolio: "投资组合",
+              tab_history: "历史",
+              badge_buy: "买入",
+              row_buy_time: "购买时间",
+              row_position_qty: "持仓数量",
+              row_order_cost: "订单成本",
+              row_current_profit: "当前利润",
+              row_handling_fee: "手续费",
+              btn_close_position: "平仓",
+              list_finished_text: "没有更多数据了！",
+              nav_home: "首页",
+              nav_market: "市场",
+              nav_trade: "交易",
+              nav_fav: "收藏",
+              nav_profile: "我的",
+              modal_close_title: "平仓?",
+              modal_close_desc_1: "您确定要平仓",
+              modal_close_desc_2: "此操作将立即执行市价卖出订单。",
+              btn_cancel: "取消",
+              btn_confirm: "确认",
+              toast_success_close: "成功平仓。",
+            },
+          };
+        }
+
+        changeLang(lang) {
+          if (!this.dict[lang]) return;
+          document.querySelectorAll("[data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            if (this.dict[lang][key]) el.innerHTML = this.dict[lang][key];
+          });
+          document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+            const key = el.getAttribute("data-i18n-placeholder");
+            if (this.dict[lang][key]) el.setAttribute("placeholder", this.dict[lang][key]);
+          });
+        }
+      }
+
+      class VerdhanaTradeApp {
+        constructor() {
+          this.i18n = new I18nManager();
+          this.isMasked = false;
+          this.activeSymbolToClose = null;
+
+          this.theme = {
+            toggle: () => {
+              const html = document.documentElement;
+              const isDark = html.classList.contains("dark");
+              if (isDark) {
+                html.classList.remove("dark");
+                html.setAttribute("data-theme", "light");
+                document.getElementById("icon-moon").classList.remove("hidden");
+                document.getElementById("icon-sun").classList.add("hidden");
+              } else {
+                html.classList.add("dark");
+                html.setAttribute("data-theme", "dark");
+                document.getElementById("icon-moon").classList.add("hidden");
+                document.getElementById("icon-sun").classList.remove("hidden");
+              }
+            },
+          };
+
+          this.ui = {
+            toggleMask: () => {
+              this.isMasked = !this.isMasked;
+              const eyeOpen = document.getElementById("eye-icon-open");
+              const eyeClosed = document.getElementById("eye-icon-closed");
+              const elements = document.querySelectorAll(".maskable-metric");
+
+              if (this.isMasked) {
+                eyeOpen.classList.add("hidden");
+                eyeClosed.classList.remove("hidden");
+                elements.forEach((el) => {
+                  const mask = el.getAttribute("data-mask") || "••••";
+                  el.textContent = mask + (el.id === "val-main-asset" ? "" : ""); // Suffix handled in HTML spacing
+                });
+              } else {
+                eyeClosed.classList.add("hidden");
+                eyeOpen.classList.remove("hidden");
+                elements.forEach((el) => {
+                  const raw = el.getAttribute("data-raw");
+                  el.textContent = raw;
+                });
+              }
+            },
+            showToast: (msg) => {
+              const container = document.getElementById("toast-container");
+              const toast = document.createElement("div");
+              toast.className = "bg-gray-800 dark:bg-white text-white dark:text-gray-900 text-xs font-bold px-4 py-2.5 rounded-xl shadow-premium-md animate-slideUpFade flex items-center justify-center text-center";
+              toast.textContent = msg;
+              container.appendChild(toast);
+              setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateY(-10px)";
+                toast.style.transition = "all 0.3s ease";
+                setTimeout(() => toast.remove(), 300);
+              }, 3000);
+            },
+          };
+
+          this.tabs = {
+            switchTab: (tabId) => {
+              const btnPortfolio = document.getElementById("tab-btn-portfolio");
+              const btnHistory = document.getElementById("tab-btn-history");
+              const panelPortfolio = document.getElementById("panel-portfolio");
+              const panelHistory = document.getElementById("panel-history");
+              const indicator = document.getElementById("trade-tab-line");
+
+              if (tabId === "portfolio") {
+                btnPortfolio.setAttribute("aria-selected", "true");
+                btnHistory.setAttribute("aria-selected", "false");
+                panelPortfolio.classList.remove("hidden");
+                panelHistory.classList.add("hidden");
+                panelHistory.classList.remove("flex");
+                indicator.style.transform = "translateX(0%)";
+              } else {
+                btnPortfolio.setAttribute("aria-selected", "false");
+                btnHistory.setAttribute("aria-selected", "true");
+                panelPortfolio.classList.add("hidden");
+                panelHistory.classList.remove("hidden");
+                panelHistory.classList.add("flex");
+                indicator.style.transform = "translateX(100%)";
+              }
+            },
+          };
+
+          this.modal = {
+            openClosePositionModal: (symbol) => {
+              this.activeSymbolToClose = symbol;
+              document.getElementById("modal-symbol-name").textContent = symbol;
+              const modal = document.getElementById("modal-close-position");
+              modal.classList.remove("hidden");
+              modal.classList.add("flex");
+            },
+            closeClosePositionModal: () => {
+              const modal = document.getElementById("modal-close-position");
+              modal.classList.add("hidden");
+              modal.classList.remove("flex");
+              this.activeSymbolToClose = null;
+            },
+            confirmClosePosition: () => {
+              if (this.activeSymbolToClose) {
+                // Sembunyikan kartu emiten dari UI
+                const card = document.getElementById("order-card-inco");
+                if (card && this.activeSymbolToClose === "INCO") {
+                  card.style.display = "none";
+                }
+                const lang = document.getElementById("lang-switcher").value;
+                this.ui.showToast(this.i18n.dict[lang].toast_success_close);
+              }
+              this.modal.closeClosePositionModal();
+            },
+          };
+
+          this.filter = {
+            search: (query) => {
+              const q = query.toLowerCase().trim();
+              const cardInco = document.getElementById("order-card-inco");
+              const emptyState = document.getElementById("portfolio-search-empty");
+              const btnClear = document.getElementById("btn-clear-search");
+
+              if (q.length > 0) {
+                btnClear.classList.remove("hidden");
+              } else {
+                btnClear.classList.add("hidden");
+              }
+
+              // Simple client side filtering logic
+              if (cardInco && cardInco.style.display !== "none") {
+                const name = cardInco.getAttribute("data-name").toLowerCase();
+                const symbol = cardInco.getAttribute("data-symbol").toLowerCase();
+
+                if (name.includes(q) || symbol.includes(q)) {
+                  cardInco.style.display = "block";
+                  emptyState.classList.add("hidden");
+                } else {
+                  cardInco.style.display = "none";
+                  emptyState.classList.remove("hidden");
+                  emptyState.classList.add("block");
+                }
+              }
+            },
+            clearSearch: () => {
+              const input = document.getElementById("global-search");
+              input.value = "";
+              this.filter.search("");
+            },
+          };
+
+          this.init();
+        }
+
+        init() {
+          // 1. Matikan Skeleton Loader dan Tampilkan Konten Asli setelah 1 detik
+          setTimeout(() => {
+            const skeleton = document.getElementById("trade-skeleton");
+            const realContent = document.getElementById("trade-real-content");
+            if (skeleton && realContent) {
+              skeleton.style.opacity = "0";
+              setTimeout(() => {
+                skeleton.classList.add("hidden");
+                realContent.classList.remove("hidden");
+                // Trigger reflow & fade in
+                void realContent.offsetWidth;
+                realContent.classList.add("animate-slideUpFade");
+                realContent.style.opacity = "1";
+              }, 300);
+            }
+          }, 800);
+
+          // 2. Setup Search Listener
+          const searchInput = document.getElementById("global-search");
+          if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+              this.filter.search(e.target.value);
+            });
+          }
+
+          // 3. Ripple Effect Listener
+          document.addEventListener("click", (e) => {
+            const target = e.target.closest(".ripple-surface");
+            if (!target) return;
+            const rect = target.getBoundingClientRect();
+            const diameter = Math.max(target.clientWidth, target.clientHeight);
+            const radius = diameter / 2;
+            const ripple = document.createElement("span");
+            ripple.className = "ripple-circle";
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${e.clientX - rect.left - radius}px`;
+            ripple.style.top = `${e.clientY - rect.top - radius}px`;
+            const existing = target.querySelector(".ripple-circle");
+            if (existing) existing.remove();
+            target.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+          });
+        }
+      }
+
+      // Initialize App on DOM Ready
+      document.addEventListener("DOMContentLoaded", () => {
+        window.VerdhanaTradeApp = new VerdhanaTradeApp();
+      });
+    </script>
+  </body>
+</html>
