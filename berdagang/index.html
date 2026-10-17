@@ -54,7 +54,7 @@
             },
             boxShadow: {
               "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
-              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)",
+              "premium-md": "0 12px 36px -8px rgba(0, 0, 0, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03)",
               "premium-lg": "0 20px 45px -12px rgba(211, 47, 47, 0.14), 0 8px 18px -4px rgba(0, 0, 0, 0.05)",
               "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
               "premium-inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
@@ -108,8 +108,8 @@
         --bg-app: #ffffff;
         --bg-surface: #f8fafc;
         --bg-card: #ffffff;
-        --bg-glass: rgba(255, 255, 255, 0.85);
-        --border-glass: rgba(226, 232, 240, 0.6);
+        --bg-glass: rgba(255, 255, 255, 0.88);
+        --border-glass: rgba(226, 232, 240, 0.65);
         --border-card: rgba(224, 224, 224, 0.65);
         --border-dashed: #cbd5e1;
 
@@ -135,8 +135,8 @@
         --bg-app: #0f172a;
         --bg-surface: #1e293b;
         --bg-card: #1e293b;
-        --bg-glass: rgba(15, 23, 42, 0.85);
-        --border-glass: rgba(30, 41, 59, 0.5);
+        --bg-glass: rgba(15, 23, 42, 0.88);
+        --border-glass: rgba(30, 41, 59, 0.6);
         --border-card: rgba(51, 65, 85, 0.7);
         --border-dashed: #334155;
 
@@ -162,7 +162,6 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      /* Tabular numbers for financial alignment */
       .fw-num {
         font-variant-numeric: tabular-nums;
         letter-spacing: -0.02em;
@@ -213,7 +212,8 @@
         transition:
           transform 0.3s var(--ease-spring),
           box-shadow 0.3s var(--ease-premium),
-          border-color 0.3s var(--ease-premium);
+          border-color 0.3s var(--ease-premium),
+          background-color 0.3s var(--ease-premium);
       }
       .hover-lift:hover {
         transform: translateY(-3px);
@@ -249,7 +249,6 @@
       }
 
       /* --- 4.7 TRADE PAGE SPECIFIC COMPONENTS (PROTOTYPE CLONE & POLISH) --- */
-      /* 1. Top "Aset Saya" Bar (hold / van-tabs) */
       .hold-tab-bar {
         background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-card) 100%);
         border: 1px solid var(--border-card);
@@ -266,7 +265,6 @@
         box-shadow: 0 4px 14px -2px rgba(211, 47, 47, 0.35);
       }
 
-      /* 2. Main Asset Summary Card (data-wrapper) */
       .data-wrapper-card {
         background-color: var(--bg-card);
         border: 1px solid var(--border-card);
@@ -286,7 +284,6 @@
         opacity: 0.9;
       }
 
-      /* 3. Two-Column Status Grid (beijin / grid-container) */
       .beijin-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -303,7 +300,6 @@
         border-color: var(--ex-primary-border);
       }
 
-      /* 4. Interactive Sub-Tabs (Portofolio & Histori) */
       .trade-tabs-nav {
         position: relative;
         display: grid;
@@ -346,7 +342,6 @@
         box-shadow: 0 2px 8px rgba(211, 47, 47, 0.45);
       }
 
-      /* 5. Stock Position Order Box (myStockList -> order-box) */
       .order-box-card {
         background-color: var(--bg-card);
         border: 1px solid var(--border-card);
@@ -358,7 +353,6 @@
         border-color: var(--ex-primary-border);
       }
 
-      /* Pill Badges (ID, OTC, Pembelian) */
       .stock-badge {
         display: inline-flex;
         align-items: center;
@@ -391,7 +385,6 @@
         border: 1px solid rgba(16, 185, 129, 0.25);
       }
 
-      /* Precision Horizontal Dashed Separator (.line) */
       .order-dashed-separator {
         width: 100%;
         height: 1px;
@@ -399,7 +392,6 @@
         border-bottom: 1px dashed var(--border-dashed);
       }
 
-      /* Primary Full-Width Action Button ("Menutup posisi") */
       .btn-close-position {
         background-color: var(--ex-primary-color);
         color: #ffffff;
@@ -467,7 +459,8 @@
             inset 0 0 0 2px rgba(255, 255, 255, 0.5);
           border: 1px solid var(--border-glass);
         }
-        .bottom-nav-glass {
+        .bottom-nav-glass,
+        .bottom-nav-fixed {
           position: absolute !important;
           border-bottom-left-radius: 2.5rem;
           border-bottom-right-radius: 2.5rem;
@@ -492,6 +485,7 @@
       }
     </style>
   </head>
+
   <body class="text-gray-800 dark:text-gray-100 antialiased selection:bg-brand-red selection:text-white transition-colors duration-500 ease-in-out">
     <!-- =======================================================================
          5. MAIN APPLICATION CONTAINER (FRAME)
@@ -502,7 +496,7 @@
            ===================================================================== -->
       <header role="banner" class="glass-effect pt-safe sticky top-0 z-[9998] px-4 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
         <!-- Logo Asli Verdhana -->
-        <a href="Verdhana_Sek V.2_3.html" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 cursor-pointer focus-visible-ring p-1 -ml-1 group">
+        <a href="https://verdhanaprototype-11vy.vercel.app/" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 cursor-pointer focus-visible-ring p-1 -ml-1 group">
           <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm group-hover:scale-105 transition-transform duration-300">V</span>
           <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
         </a>
@@ -785,7 +779,7 @@
                       <span id="inco-current-profit" class="fw-num font-extrabold text-gray-900 dark:text-white"> 29.312.493,60 Rp </span>
                     </div>
 
-                    <!-- Baris 5: Biaya Penanganan (Kapitalisasi Diperbaiki: 15.506,40 Rp) -->
+                    <!-- Baris 5: Biaya Penanganan (15.506,40 Rp) -->
                     <div class="item flex items-center justify-between gap-2">
                       <span data-i18n="row_handling_fee" class="text-gray-500 dark:text-gray-400 font-medium"> Biaya Penanganan </span>
                       <span class="fw-num font-bold text-gray-900 dark:text-white"> 15.506,40 Rp </span>
@@ -826,12 +820,13 @@
         </div>
       </div>
       <!-- END MAIN VIEWPORT -->
+
       <!-- =====================================================================
            8. BOTTOM NAVIGATION BAR (FIXED, 100% PRECISE VISUAL CLONE)
            ===================================================================== -->
       <nav
         aria-label="Navigasi Utama"
-        class="glass-effect bottom-nav-fixed pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transition-colors duration-500"
+        class="glass-effect bottom-nav-glass bottom-nav-fixed pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transition-colors duration-500"
       >
         <!-- Menu 1: Beranda (Abu-abu) -->
         <a
@@ -863,7 +858,11 @@
         </a>
 
         <!-- Menu 3: Berdagang (AKTIF - MERAH VERDHANA) -->
-        <a href="https://verdhanaprototype-11vy.vercel.app/berdagang" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl">
+        <a
+          href="https://verdhanaprototype-11vy.vercel.app/berdagang"
+          aria-current="page"
+          class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface ripple-light rounded-xl"
+        >
           <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -905,18 +904,14 @@
     <!-- =======================================================================
          9. MODAL POPUP & TOAST ALERTS OVERLAY (Z-INDEX: 10000)
          ======================================================================= -->
-
-    <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-[10000] flex flex-col gap-2 pointer-events-none w-max max-w-[90%]"></div>
 
     <!-- Confirm Close Position Modal -->
-    <div id="modal-close-position" class="fixed inset-0 z-[10000] hidden items-center justify-center p-4">
-      <!-- Modal Backdrop (Blur effect) -->
+    <div id="modal-close-position" role="dialog" aria-modal="true" aria-labelledby="modal-close-heading" class="fixed inset-0 z-[10000] hidden items-center justify-center p-4">
       <div class="absolute inset-0 bg-gray-900/60 dark:bg-black/70 backdrop-blur-sm transition-opacity" onclick="window.VerdhanaTradeApp.modal.closeClosePositionModal()"></div>
 
-      <!-- Modal Content Card -->
       <div class="bg-white dark:bg-slate-800 rounded-[1.5rem] w-full max-w-[320px] p-6 relative z-10 shadow-premium-lg border border-brand-silver/50 dark:border-slate-700 animate-modalPop">
-        <h3 data-i18n="modal_close_title" class="text-xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Tutup Posisi?</h3>
+        <h3 id="modal-close-heading" data-i18n="modal_close_title" class="text-xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Tutup Posisi?</h3>
         <p class="text-[13px] text-gray-500 dark:text-gray-400 mb-6 font-medium leading-relaxed">
           <span data-i18n="modal_close_desc_1">Apakah Anda yakin ingin menutup posisi untuk emiten</span>
           <strong id="modal-symbol-name" class="text-gray-900 dark:text-white font-extrabold mx-1">...</strong>?
@@ -1049,7 +1044,9 @@
           });
           document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
             const key = el.getAttribute("data-i18n-placeholder");
-            if (this.dict[lang][key]) el.setAttribute("placeholder", this.dict[lang][key]);
+            if (this.dict[lang][key]) {
+              el.setAttribute("placeholder", this.dict[lang][key]);
+            }
           });
         }
       }
@@ -1083,14 +1080,19 @@
               this.isMasked = !this.isMasked;
               const eyeOpen = document.getElementById("eye-icon-open");
               const eyeClosed = document.getElementById("eye-icon-closed");
+              const btnEye = document.getElementById("btn-eye-toggle");
               const elements = document.querySelectorAll(".maskable-metric");
+
+              if (btnEye) {
+                btnEye.setAttribute("aria-pressed", String(this.isMasked));
+              }
 
               if (this.isMasked) {
                 eyeOpen.classList.add("hidden");
                 eyeClosed.classList.remove("hidden");
                 elements.forEach((el) => {
                   const mask = el.getAttribute("data-mask") || "••••";
-                  el.textContent = mask + (el.id === "val-main-asset" ? "" : ""); // Suffix handled in HTML spacing
+                  el.textContent = mask;
                 });
               } else {
                 eyeClosed.classList.add("hidden");
@@ -1126,14 +1128,18 @@
 
               if (tabId === "portfolio") {
                 btnPortfolio.setAttribute("aria-selected", "true");
+                btnPortfolio.setAttribute("tabindex", "0");
                 btnHistory.setAttribute("aria-selected", "false");
+                btnHistory.setAttribute("tabindex", "-1");
                 panelPortfolio.classList.remove("hidden");
                 panelHistory.classList.add("hidden");
                 panelHistory.classList.remove("flex");
                 indicator.style.transform = "translateX(0%)";
               } else {
                 btnPortfolio.setAttribute("aria-selected", "false");
+                btnPortfolio.setAttribute("tabindex", "-1");
                 btnHistory.setAttribute("aria-selected", "true");
+                btnHistory.setAttribute("tabindex", "0");
                 panelPortfolio.classList.add("hidden");
                 panelHistory.classList.remove("hidden");
                 panelHistory.classList.add("flex");
@@ -1158,10 +1164,18 @@
             },
             confirmClosePosition: () => {
               if (this.activeSymbolToClose) {
-                // Sembunyikan kartu emiten dari UI
                 const card = document.getElementById("order-card-inco");
+                const historyList = document.getElementById("history-dynamic-list");
                 if (card && this.activeSymbolToClose === "INCO") {
                   card.style.display = "none";
+                  if (historyList) {
+                    const closedClone = card.cloneNode(true);
+                    closedClone.id = "history-card-inco";
+                    closedClone.style.display = "block";
+                    const btnWrap = closedClone.querySelector(".flex-btn");
+                    if (btnWrap) btnWrap.remove();
+                    historyList.prepend(closedClone);
+                  }
                 }
                 const lang = document.getElementById("lang-switcher").value;
                 this.ui.showToast(this.i18n.dict[lang].toast_success_close);
@@ -1183,8 +1197,7 @@
                 btnClear.classList.add("hidden");
               }
 
-              // Simple client side filtering logic
-              if (cardInco && cardInco.style.display !== "none") {
+              if (cardInco) {
                 const name = cardInco.getAttribute("data-name").toLowerCase();
                 const symbol = cardInco.getAttribute("data-symbol").toLowerCase();
 
@@ -1209,7 +1222,7 @@
         }
 
         init() {
-          // 1. Matikan Skeleton Loader dan Tampilkan Konten Asli setelah 1 detik
+          // 1. Matikan Skeleton Loader dan Tampilkan Konten Asli secara halus
           setTimeout(() => {
             const skeleton = document.getElementById("trade-skeleton");
             const realContent = document.getElementById("trade-real-content");
@@ -1218,13 +1231,12 @@
               setTimeout(() => {
                 skeleton.classList.add("hidden");
                 realContent.classList.remove("hidden");
-                // Trigger reflow & fade in
                 void realContent.offsetWidth;
                 realContent.classList.add("animate-slideUpFade");
                 realContent.style.opacity = "1";
               }, 300);
             }
-          }, 800);
+          }, 600);
 
           // 2. Setup Search Listener
           const searchInput = document.getElementById("global-search");
@@ -1254,7 +1266,6 @@
         }
       }
 
-      // Initialize App on DOM Ready
       document.addEventListener("DOMContentLoaded", () => {
         window.VerdhanaTradeApp = new VerdhanaTradeApp();
       });
