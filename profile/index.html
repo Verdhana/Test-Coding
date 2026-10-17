@@ -38,23 +38,50 @@
                 red: "#D32F2F" /* Client Exact Red */,
                 darkred: "#B71C1C" /* Client Exact Dark Red */,
                 silver: "#E0E0E0" /* Client Exact Silver */,
-                lightsilver: "#F8FAFC",
-                darksilver: "#94A3B8",
+                lightsilver: "#F8FAFC" /* Client Exact Light Silver */,
+                darksilver: "#94A3B8" /* Client Exact Dark Silver */,
               },
               positive: "#10B981",
               negative: "#EF4444",
               menu: {
-                orange: { bg: "#ffedd5", text: "#ea580c", darkBg: "rgba(234, 88, 12, 0.15)", darkText: "#fdba74" },
-                red: { bg: "#fee2e2", text: "#dc2626", darkBg: "rgba(220, 38, 38, 0.15)", darkText: "#fca5a5" },
-                blue: { bg: "#e0e7ff", text: "#4f46e5", darkBg: "rgba(79, 70, 229, 0.15)", darkText: "#a5b4fc" },
-                cyan: { bg: "#e0f2fe", text: "#0284c7", darkBg: "rgba(2, 132, 199, 0.15)", darkText: "#7dd3fc" },
-                purple: { bg: "#f3e8ff", text: "#9333ea", darkBg: "rgba(147, 51, 234, 0.15)", darkText: "#d8b4fe" },
+                orange: {
+                  bg: "#ffedd5",
+                  text: "#ea580c",
+                  darkBg: "rgba(234, 88, 12, 0.15)",
+                  darkText: "#fdba74",
+                },
+                red: {
+                  bg: "#fee2e2",
+                  text: "#dc2626",
+                  darkBg: "rgba(220, 38, 38, 0.15)",
+                  darkText: "#fca5a5",
+                },
+                blue: {
+                  bg: "#e0e7ff",
+                  text: "#4f46e5",
+                  darkBg: "rgba(79, 70, 229, 0.15)",
+                  darkText: "#a5b4fc",
+                },
+                cyan: {
+                  bg: "#e0f2fe",
+                  text: "#0284c7",
+                  darkBg: "rgba(2, 132, 199, 0.15)",
+                  darkText: "#7dd3fc",
+                },
+                purple: {
+                  bg: "#f3e8ff",
+                  text: "#9333ea",
+                  darkBg: "rgba(147, 51, 234, 0.15)",
+                  darkText: "#d8b4fe",
+                },
               },
             },
             boxShadow: {
               "premium-sm": "0 2px 10px -2px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02)",
-              "premium-md": "0 10px 40px -10px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03)",
+              "premium-md": "0 12px 36px -8px rgba(0, 0, 0, 0.07), 0 4px 12px -2px rgba(0, 0, 0, 0.03)",
+              "premium-lg": "0 20px 45px -12px rgba(211, 47, 47, 0.14), 0 8px 18px -4px rgba(0, 0, 0, 0.05)",
               "premium-glass": "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
+              "premium-inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
             },
             keyframes: {
               slideUpFade: {
@@ -82,8 +109,8 @@
       :root {
         --bg-outer: #f1f5f9;
         --bg-app: #ffffff;
-        --bg-glass: rgba(255, 255, 255, 0.85);
-        --border-glass: rgba(226, 232, 240, 0.6);
+        --bg-glass: rgba(255, 255, 255, 0.88);
+        --border-glass: rgba(226, 232, 240, 0.65);
         --ease-premium: cubic-bezier(0.25, 0.1, 0.25, 1);
         --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
@@ -91,14 +118,26 @@
       html.dark {
         --bg-outer: #020617;
         --bg-app: #0f172a;
-        --bg-glass: rgba(15, 23, 42, 0.85);
-        --border-glass: rgba(30, 41, 59, 0.5);
+        --bg-glass: rgba(15, 23, 42, 0.88);
+        --border-glass: rgba(30, 41, 59, 0.6);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
       }
 
       body {
         background-color: var(--bg-outer);
         transition: background-color 0.4s var(--ease-premium);
         overscroll-behavior-y: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .fw-num {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
       }
 
       *:focus {
@@ -135,7 +174,8 @@
         transition:
           transform 0.3s var(--ease-spring),
           box-shadow 0.3s var(--ease-premium),
-          border-color 0.3s var(--ease-premium);
+          border-color 0.3s var(--ease-premium),
+          background-color 0.3s var(--ease-premium);
       }
       .hover-lift:hover {
         transform: translateY(-3px);
@@ -180,6 +220,16 @@
         left: 0;
         opacity: 0;
         z-index: 10;
+      }
+
+      /* Responsive Small Mobile Guard */
+      @media screen and (max-width: 359px) {
+        .profile-email-text {
+          font-size: 13px !important;
+        }
+        .profile-main-balance {
+          font-size: 24px !important;
+        }
       }
 
       /* Desktop Framing */
@@ -228,14 +278,14 @@
          ======================================================================= -->
     <main id="app-container" class="app-container max-w-[480px] mx-auto relative bg-white dark:bg-slate-900 min-h-screen flex flex-col font-sans shadow-2xl transition-colors duration-500 ease-in-out">
       <!-- ===================================================================
-             6. HEADER (PROFIL - MINIMAL & CLEAN)
-             =================================================================== -->
+           6. HEADER (PROFIL - MINIMAL & CLEAN)
+           =================================================================== -->
       <header role="banner" class="glass-effect border-b border-brand-silver/60 dark:border-slate-700/60 pt-safe sticky top-0 z-[9998] px-5 pt-4 pb-3 flex items-center justify-between transition-colors duration-500">
         <!-- Brand Logo -->
-        <div class="flex items-baseline shrink-0">
-          <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm">V</span>
+        <a href="https://verdhanaprototype-11vy.vercel.app/" aria-label="Beranda Verdhana Sekuritas" class="flex items-baseline shrink-0 focus-visible-ring p-1 -ml-1 group">
+          <span class="text-brand-red italic font-extrabold text-2xl tracking-tighter drop-shadow-sm group-hover:scale-105 transition-transform duration-300">V</span>
           <span class="text-gray-800 dark:text-white text-sm font-bold ml-0.5 tracking-wide uppercase transition-colors">ERDHANA</span>
-        </div>
+        </a>
 
         <!-- Controls (Theme & Settings) -->
         <div class="flex items-center gap-2 shrink-0">
@@ -244,7 +294,9 @@
             aria-label="Ganti Tema"
             class="focus-visible-ring text-gray-500 dark:text-gray-400 hover:text-brand-red dark:hover:text-brand-red transition-colors active:scale-90 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"
           >
-            <svg id="icon-moon" class="w-[18px] h-[18px] block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="icon-moon" class="w-[18px] h-[18px] block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
             <svg id="icon-sun" class="w-[18px] h-[18px] hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
@@ -271,8 +323,8 @@
       </header>
 
       <!-- ===================================================================
-             7. MAIN VIEWPORT (BUG FIX: pb-[110px] prevents bottom overlap)
-             =================================================================== -->
+           7. MAIN VIEWPORT (pb-[110px] prevents bottom navigation overlap)
+           =================================================================== -->
       <div id="main-viewport" role="main" class="flex-1 overflow-y-auto overflow-x-hidden pb-[110px] no-scrollbar">
         <!-- --- 7.1 USER INFO --- -->
         <section aria-label="Informasi Pengguna" class="px-5 pt-6 pb-4 opacity-0 animate-slideUpFade" style="animation-delay: 50ms">
@@ -284,16 +336,20 @@
               N
               <!-- VIP Badge -->
               <div class="absolute -top-1 -right-2 w-6 h-6 bg-[#E0E7FF] dark:bg-slate-700 rounded-full flex items-center justify-center shadow-sm border border-white dark:border-slate-800">
-                <svg class="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#A5B4FC]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.1L12 16.4l-6.3 4.7 2.3-7.1-6-4.6h7.6z" /></svg>
+                <svg class="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#A5B4FC]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.1L12 16.4l-6.3 4.7 2.3-7.1-6-4.6h7.6z" />
+                </svg>
               </div>
             </div>
 
             <!-- Account Details -->
-            <div class="flex flex-col">
+            <div class="flex flex-col min-w-0">
               <div class="flex items-center gap-2 mb-1.5">
-                <h2 class="text-[15px] font-black text-gray-800 dark:text-white tracking-tight">niaramdhan****7@gmail.com</h2>
+                <h2 id="user-email-display" data-masked="niaramdhan****7@gmail.com" data-full="niaramdhan20267@gmail.com" class="profile-email-text text-[15px] font-black text-gray-800 dark:text-white tracking-tight truncate">
+                  niaramdhan****7@gmail.com
+                </h2>
                 <!-- Toggle Email Masking Icon -->
-                <button aria-label="Sembunyikan email" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded active:scale-90">
+                <button id="btn-toggle-email" type="button" aria-label="Sembunyikan atau tampilkan email" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded active:scale-90 shrink-0">
                   <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       stroke-linecap="round"
@@ -305,7 +361,7 @@
                 </button>
               </div>
               <div class="inline-flex items-center gap-1.5 bg-green-50 dark:bg-emerald-900/30 border border-green-200 dark:border-emerald-800/50 rounded-full px-2.5 py-1 w-max">
-                <svg class="w-3 h-3 text-positive" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-3 h-3 text-positive shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 <span data-i18n="prof_kyc_status" class="text-[10px] font-bold text-positive tracking-wide">Sudah terdaftar nama asli</span>
@@ -319,7 +375,7 @@
           <div class="flex justify-between items-start gap-3 bg-brand-lightsilver dark:bg-slate-800/50 p-4 rounded-[1.25rem] border border-brand-silver/50 dark:border-slate-700/50 shadow-premium-sm hover-lift">
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
               <div
-                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-brand-red/30"
               >
                 <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -330,7 +386,7 @@
 
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
               <div
-                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-brand-red/30"
               >
                 <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
@@ -341,9 +397,11 @@
 
             <button class="ripple-surface focus-visible-ring flex flex-col items-center flex-1 cursor-pointer group outline-none rounded-xl p-1 transition-colors">
               <div
-                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+                class="w-12 h-12 rounded-full bg-white dark:bg-slate-700 text-brand-red flex items-center justify-center mb-2.5 border border-brand-silver/60 dark:border-slate-600 shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-brand-red/30"
               >
-                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                </svg>
               </div>
               <span data-i18n="prof_details" class="text-[11px] text-center text-gray-700 dark:text-gray-300 leading-tight font-bold tracking-wide group-hover:text-brand-red transition-colors">Rincian<br />&nbsp;</span>
             </button>
@@ -360,8 +418,8 @@
               <!-- Header Card -->
               <div class="flex items-center justify-between mb-6">
                 <h3 data-i18n="prof_asset_title" class="text-sm font-black text-gray-800 dark:text-white tracking-tight">Aset Saya</h3>
-                <button id="btn-refresh-assets" aria-label="Perbarui data" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded-full p-1 active:scale-90">
-                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="btn-refresh-assets" type="button" aria-label="Perbarui data" class="text-gray-400 hover:text-brand-red transition-all duration-500 focus-visible-ring rounded-full p-1 active:scale-90">
+                  <svg id="icon-refresh-svg" class="w-[18px] h-[18px] transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                   </svg>
                 </button>
@@ -372,7 +430,7 @@
                 <div class="flex items-center gap-2 mb-1.5">
                   <span data-i18n="prof_available" class="text-xs font-semibold text-gray-500 dark:text-gray-400">Dana yang tersedia (Rp)</span>
                   <!-- Toggle Balance Button -->
-                  <button id="btn-toggle-balance" aria-label="Tampilkan saldo" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded px-1 active:scale-90">
+                  <button id="btn-toggle-balance" type="button" aria-label="Tampilkan saldo" class="text-gray-400 hover:text-brand-red transition-colors focus-visible-ring rounded px-1 active:scale-90">
                     <svg class="w-4 h-4" id="icon-eye-closed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
@@ -387,9 +445,10 @@
                     </svg>
                   </button>
                 </div>
-                <div class="text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none mb-2.5 data-balance transition-all" data-value="125000000">***</div>
+                <div class="profile-main-balance fw-num text-[28px] font-black text-gray-900 dark:text-white tracking-tight leading-none mb-2.5 data-balance transition-all" data-value="125000000">***</div>
                 <div class="text-[11px] font-semibold text-gray-500 dark:text-gray-400 flex items-center">
-                  <span data-i18n="prof_frozen">Dana yang dibekukan:</span> <span class="text-gray-700 dark:text-gray-300 font-bold data-balance ml-1" data-value="500000">***</span>
+                  <span data-i18n="prof_frozen">Dana yang dibekukan:</span>
+                  <span class="fw-num text-gray-700 dark:text-gray-300 font-bold data-balance ml-1" data-value="500000">***</span>
                 </div>
               </div>
 
@@ -397,23 +456,23 @@
               <div class="grid grid-cols-2 gap-y-5 gap-x-4 pt-5 border-t border-brand-silver/60 dark:border-slate-700/80">
                 <div class="flex flex-col">
                   <span data-i18n="prof_total_asset" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Total aset</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="125500000">***</span>
+                  <span class="fw-num text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="125500000">***</span>
                 </div>
                 <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
                   <span data-i18n="prof_used" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Dana yang digunakan</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="45000000">***</span>
+                  <span class="fw-num text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="45000000">***</span>
                 </div>
                 <div class="flex flex-col">
-                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">P&L</span>
-                  <span class="text-sm font-black text-positive data-balance transition-all" data-value="2450000" data-sign="+">***</span>
+                  <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">P&amp;L</span>
+                  <span class="fw-num text-sm font-black text-positive data-balance transition-all" data-value="2450000" data-sign="+">***</span>
                 </div>
                 <div class="flex flex-col pl-4 border-l border-brand-silver/60 dark:border-slate-700/80">
                   <span class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Equity</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="127950000">***</span>
+                  <span class="fw-num text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="127950000">***</span>
                 </div>
                 <div class="flex flex-col">
                   <span data-i18n="prof_arrears" class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 mb-0.5">Tunggakan</span>
-                  <span class="text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="0">***</span>
+                  <span class="fw-num text-sm font-black text-gray-800 dark:text-white data-balance transition-all" data-value="0">***</span>
                 </div>
               </div>
             </div>
@@ -440,7 +499,9 @@
                 <span data-i18n="menu_kyc" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Verifikasi KYC</span>
               </div>
               <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </a>
 
@@ -456,7 +517,9 @@
                 <span data-i18n="menu_bank" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Akun bank</span>
               </div>
               <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </a>
 
@@ -472,7 +535,9 @@
                 <span data-i18n="menu_pwd_withdraw" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Kata sandi penarikan</span>
               </div>
               <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </a>
 
@@ -488,7 +553,9 @@
                 <span data-i18n="menu_pwd_login" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Ubah kata sandi masuk</span>
               </div>
               <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </a>
 
@@ -504,7 +571,9 @@
                 <span data-i18n="menu_company" class="text-sm font-bold text-gray-800 dark:text-white tracking-tight group-hover:text-brand-red transition-colors">Pengenalan Perusahaan</span>
               </div>
               <div class="text-gray-400 group-hover:translate-x-1.5 group-hover:text-brand-red transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </a>
 
@@ -534,6 +603,7 @@
 
             <!-- Secure Logout Action -->
             <button
+              type="button"
               onclick="alert('Sesi Anda telah berakhir.')"
               class="ripple-surface focus-visible-ring w-full group flex items-center justify-between p-4 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors text-left relative z-10"
             >
@@ -546,7 +616,9 @@
                 <span data-i18n="menu_logout" class="text-sm font-bold text-brand-red tracking-tight">Keluar</span>
               </div>
               <div class="text-brand-red group-hover:translate-x-1.5 transition-all duration-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </button>
           </div>
@@ -555,8 +627,8 @@
       <!-- END MAIN VIEWPORT -->
 
       <!-- ===================================================================
-             8. BOTTOM NAVIGATION BAR (FIXED, EXACT SVG SOLID CLONE)
-             =================================================================== -->
+           8. BOTTOM NAVIGATION BAR (FIXED, EXACT SVG SOLID CLONE)
+           =================================================================== -->
       <nav
         aria-label="Navigasi Utama"
         class="glass-effect bottom-nav-glass pb-safe fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] flex justify-between px-2 pt-2.5 z-[9999] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transition-colors duration-500"
@@ -578,7 +650,7 @@
 
         <!-- Pasar -->
         <a
-          href="https://verdhanaprototype-11vy.vercel.app/"
+          href="#market"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
           <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
@@ -592,7 +664,7 @@
 
         <!-- Berdagang -->
         <a
-          href="https://verdhanaprototype-11vy.vercel.app/"
+          href="https://verdhanaprototype-11vy.vercel.app/berdagang"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
           <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
@@ -607,7 +679,7 @@
 
         <!-- Favorit -->
         <a
-          href="https://verdhanaprototype-11vy.vercel.app/"
+          href="#favorites"
           class="flex flex-col items-center justify-center flex-1 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors group p-1 focus-visible-ring outline-none ripple-surface rounded-xl"
         >
           <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
@@ -619,7 +691,7 @@
         </a>
 
         <!-- Profil (Aktif - Merah Verdhana) -->
-        <a href="https://verdhanaprototype-11vy.vercel.app/" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
+        <a href="https://verdhanaprototype-11vy.vercel.app/profile" aria-current="page" class="flex flex-col items-center justify-center flex-1 text-brand-red group p-1 focus-visible-ring outline-none ripple-surface rounded-xl">
           <div class="mb-1.5 transition-transform group-active:scale-90 group-hover:-translate-y-1 duration-300">
             <svg class="w-[24px] h-[24px] fill-current drop-shadow-sm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z" />
@@ -735,12 +807,16 @@
       class VerdhanaProfileApp {
         constructor() {
           this.isBalanceVisible = false;
+          this.isEmailMasked = true;
+          this.refreshRotation = 0;
           this.i18n = new I18nProfile();
           this.init();
         }
 
         init() {
           this.setupToggleBalance();
+          this.setupToggleEmail();
+          this.setupRefreshAssets();
           this.setupRippleEffect();
         }
 
@@ -762,6 +838,28 @@
           }
         }
 
+        setupToggleEmail() {
+          const btnEmail = document.getElementById("btn-toggle-email");
+          const emailEl = document.getElementById("user-email-display");
+          if (!btnEmail || !emailEl) return;
+
+          btnEmail.addEventListener("click", () => {
+            this.isEmailMasked = !this.isEmailMasked;
+            emailEl.textContent = this.isEmailMasked ? emailEl.getAttribute("data-masked") : emailEl.getAttribute("data-full");
+          });
+        }
+
+        setupRefreshAssets() {
+          const btnRefresh = document.getElementById("btn-refresh-assets");
+          const iconSvg = document.getElementById("icon-refresh-svg");
+          if (!btnRefresh || !iconSvg) return;
+
+          btnRefresh.addEventListener("click", () => {
+            this.refreshRotation += 360;
+            iconSvg.style.transform = `rotate(${this.refreshRotation}deg)`;
+          });
+        }
+
         setupToggleBalance() {
           const btnToggle = document.getElementById("btn-toggle-balance");
           const iconClosed = document.getElementById("icon-eye-closed");
@@ -780,7 +878,12 @@
               balanceElements.forEach((el) => {
                 const rawVal = parseFloat(el.getAttribute("data-value")) || 0;
                 const sign = el.getAttribute("data-sign") || "";
-                el.textContent = sign + new Intl.NumberFormat("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(rawVal);
+                el.textContent =
+                  sign +
+                  new Intl.NumberFormat("id-ID", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(rawVal);
               });
             } else {
               iconOpen.classList.add("hidden");
